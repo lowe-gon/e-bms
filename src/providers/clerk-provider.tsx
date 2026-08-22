@@ -1,4 +1,4 @@
-import { ENV } from '@/validators/env';
+import { ENV } from '@/typings/env';
 import { ClerkProvider as ClerkProviderBase } from '@clerk/nextjs';
 import React from 'react';
 

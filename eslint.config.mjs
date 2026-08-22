@@ -16,7 +16,7 @@ const eslintConfig = defineConfig([
         'error',
         {
           protected: ['**'],
-          public: ['src/app/sign-in/**', 'src/app/sign-up/**'],
+          public: ['src/app/sign-in/**', 'src/app/sign-up/**', 'src/app/api/webhooks/**'],
           resources: {
             routeHandlers: true,
             serverFunctions: true,
