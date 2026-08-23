@@ -83,9 +83,8 @@ export default function AppSidebar({ ...props }: React.ComponentProps<typeof Sid
                 <SidebarMenu>
                   {section.items.map((item) => {
                     const Icon = item.icon;
-                    const isActive =
-                      (pathname === '/' && item.id === 'dashboard') || pathname === item.id;
                     const path = item.id === 'dashboard' ? '/' : `/${item.id}`;
+                    const isActive = pathname === path;
 
                     return (
                       <SidebarMenuItem key={item.id}>
@@ -94,7 +93,7 @@ export default function AppSidebar({ ...props }: React.ComponentProps<typeof Sid
                             isActive={isActive}
                             size="lg"
                             tooltip={item.label}
-                            className="group-data-[collapsible=icon]:p-2! active:bg-blue-500! data-active:bg-blue-500 data-active:text-white data-active:hover:bg-blue-600 data-active:hover:text-white">
+                            className="group-data-[collapsible=icon]:p-2! active:bg-blue-500! data-active:bg-blue-600 data-active:text-white data-active:hover:bg-blue-500 data-active:hover:text-white">
                             <Icon className="size-4" />
                             <div className="pointer-events-none grid flex-1 text-left">
                               <div className="truncate leading-tight font-semibold">
