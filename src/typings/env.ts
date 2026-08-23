@@ -13,6 +13,7 @@ export const EnvSchema = z.object({
   SUPABASE_SECRET_KEY: z.string(),
   DATABASE_URL: z.string(),
   SUPABASE_SERVICE_ROLE: z.string(),
+  SUPABASE_PROJECT_ID: z.string(),
 });
 
 export const ENV = EnvSchema.parse(process.env);

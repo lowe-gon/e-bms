@@ -1,8 +1,8 @@
 import { clerkMiddleware } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 
-const AUTH_ROUTES = ['/sign-in', '/forgot-password'];
-const PROTECTED_PREFIXES = ['/', '/api/webhooks(.*)'];
+const AUTH_ROUTES = ['/sign-in', '/forgot-password', '/api/webhooks(.*)'];
+const PROTECTED_PREFIXES = ['/'];
 
 export default clerkMiddleware(async (auth, req) => {
   const pathname = req.nextUrl.pathname;

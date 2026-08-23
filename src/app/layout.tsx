@@ -38,7 +38,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       )}>
       <body className="flex w-screen max-w-screen flex-col overflow-x-hidden">
         <AppProvider>
-          <main className="h-dvh min-h-dvh">{children}</main>
+          <div className="h-dvh min-h-dvh">{children}</div>
         </AppProvider>
       </body>
     </html>
