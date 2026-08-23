@@ -15,15 +15,15 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     switch (eventType) {
       case 'user.created':
       case 'user.updated': {
-        const firstName = evt.data.first_name;
-        const lastName = evt.data.last_name;
-        const avatarUrl = evt.data.image_url;
+        const firstName = evt.data.first_name ?? '';
+        const lastName = evt.data.last_name ?? '';
+        const avatarUrl = evt.data.image_url ?? '';
         const phoneNumber = evt.data.phone_numbers?.[0]?.phone_number ?? '';
         const updatedAt = evt.data.updated_at;
 
         const { error } = await supabase.from('users').upsert(
           {
-            clerk_id: id,
+            clerk_id: id ?? '',
             first_name: firstName,
             last_name: lastName,
             avatar_url: avatarUrl,

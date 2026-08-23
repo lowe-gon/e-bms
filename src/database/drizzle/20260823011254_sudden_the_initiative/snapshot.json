@@ -2,17 +2,10 @@
   "version": "8",
   "dialect": "postgres",
   "id": "868889e6-7816-4bb8-b666-d2a7ee0175cb",
-  "prevIds": [
-    "8ca18c13-bc27-4f4c-b5ec-119fb28653c7"
-  ],
+  "prevIds": ["8ca18c13-bc27-4f4c-b5ec-119fb28653c7"],
   "ddl": [
     {
-      "values": [
-        "captain",
-        "secretary",
-        "councilor",
-        "treasurer"
-      ],
+      "values": ["captain", "secretary", "councilor", "treasurer"],
       "name": "role",
       "entityType": "enums",
       "schema": "public"
@@ -239,14 +232,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "sector_id"
-      ],
+      "columns": ["sector_id"],
       "schemaTo": "public",
       "tableTo": "sectors",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "NO ACTION",
       "name": "users_sector_id_sectors_id_fkey",
@@ -255,9 +244,7 @@
       "table": "users"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "sectors_pkey",
       "schema": "public",
@@ -265,9 +252,7 @@
       "entityType": "pks"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "users_pkey",
       "schema": "public",
@@ -276,9 +261,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nullsNotDistinct": false,
       "name": "sectors_id_key",
       "schema": "public",
@@ -287,9 +270,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "code"
-      ],
+      "columns": ["code"],
       "nullsNotDistinct": false,
       "name": "sectors_code_key",
       "schema": "public",
@@ -298,9 +279,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "name"
-      ],
+      "columns": ["name"],
       "nullsNotDistinct": false,
       "name": "sectors_name_key",
       "schema": "public",
@@ -309,9 +288,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nullsNotDistinct": false,
       "name": "users_id_key",
       "schema": "public",
@@ -320,9 +297,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "clerk_id"
-      ],
+      "columns": ["clerk_id"],
       "nullsNotDistinct": false,
       "name": "users_clerk_id_key",
       "schema": "public",
@@ -332,9 +307,7 @@
     {
       "as": "PERMISSIVE",
       "for": "INSERT",
-      "roles": [
-        "public"
-      ],
+      "roles": ["public"],
       "using": null,
       "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = auth.jwt() ->> 'sub'\n)",
       "name": "Sector Insert Policy",
@@ -345,9 +318,7 @@
     {
       "as": "PERMISSIVE",
       "for": "SELECT",
-      "roles": [
-        "public"
-      ],
+      "roles": ["public"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = auth.jwt() ->> 'sub'\n)",
       "withCheck": null,
       "name": "Sector Select Policy",
@@ -358,9 +329,7 @@
     {
       "as": "PERMISSIVE",
       "for": "UPDATE",
-      "roles": [
-        "public"
-      ],
+      "roles": ["public"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = auth.jwt() ->> 'sub'\n)",
       "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = auth.jwt() ->> 'sub'\n)",
       "name": "Sector Update Policy",
@@ -371,9 +340,7 @@
     {
       "as": "PERMISSIVE",
       "for": "DELETE",
-      "roles": [
-        "public"
-      ],
+      "roles": ["public"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = auth.jwt() ->> 'sub'\n)",
       "withCheck": null,
       "name": "Sector Delete Policy",
@@ -384,9 +351,7 @@
     {
       "as": "PERMISSIVE",
       "for": "INSERT",
-      "roles": [
-        "service_role"
-      ],
+      "roles": ["service_role"],
       "using": null,
       "withCheck": "true",
       "name": "User Insert Policy",
@@ -397,9 +362,7 @@
     {
       "as": "PERMISSIVE",
       "for": "SELECT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "(select auth.jwt() ->> 'sub') = (clerk_id)::text",
       "withCheck": null,
       "name": "User Select Policy",
@@ -410,9 +373,7 @@
     {
       "as": "PERMISSIVE",
       "for": "UPDATE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "(select auth.jwt() ->> 'sub') = (clerk_id)::text",
       "withCheck": "(select auth.jwt() ->> 'sub') = (clerk_id)::text",
       "name": "User Update Policy",
@@ -423,9 +384,7 @@
     {
       "as": "PERMISSIVE",
       "for": "DELETE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "(select auth.jwt() ->> 'sub') = (clerk_id)::text",
       "withCheck": null,
       "name": "User Delete Policy",
