@@ -1,3 +1,5 @@
+import type { Database } from '@/typings/database.types';
+
 export type UserRole = 'captain' | 'secretary' | 'treasurer' | 'councilor';
 
 export type ResponseMetaData = {
@@ -11,3 +13,5 @@ export type ResponseData<TData> = {
   metadata: ResponseMetaData | null;
   data: TData;
 };
+
+export type Users = Database['public']['Tables']['users']['Row'];

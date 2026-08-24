@@ -33,30 +33,29 @@ import {
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { getNavSections } from '@/constants/navigations';
-import useGetUserQuery from '@/features/user/hooks/use-get-user';
+import useGetUserQuery from '@/features/user/hooks/use-get-user-query';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useClerk } from '@clerk/nextjs';
 import { ChevronsUpDown, LogOut, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
+import { Skeleton } from './ui/skeleton';
 
 export default function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
   const isMobile = useIsMobile();
-  const { data, isLoading } = useGetUserQuery();
+  const { data, isFetching: isLoading } = useGetUserQuery();
   const { signOut } = useClerk();
 
   const [showLogoutDialog, setShowLogoutDialog] = React.useState<boolean>(false);
 
-  if (isLoading || !data) return null;
-
-  const navSections = getNavSections(data.role);
+  const navSections = getNavSections(data?.role ?? 'captain');
 
   return (
     <>
       <Sidebar collapsible="icon" {...props}>
-        <SidebarHeader className="border-border flex flex-col gap-3 border-b">
+        <SidebarHeader className="border-border flex flex-col gap-3 border-b pb-4">
           <div className="flex items-center gap-1.5 px-0.5">
             <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
               <ShieldCheck className="size-4 text-yellow-300" />
@@ -74,118 +73,143 @@ export default function AppSidebar({ ...props }: React.ComponentProps<typeof Sid
         </SidebarHeader>
 
         <SidebarContent>
-          {navSections.map((section) => (
-            <SidebarGroup key={section.title}>
-              <SidebarGroupLabel className="pointer-events-none text-[10px] font-black uppercase">
-                {section.title}
-              </SidebarGroupLabel>
-              <SidebarGroupContent>
-                <SidebarMenu>
-                  {section.items.map((item) => {
-                    const Icon = item.icon;
-                    const path = item.id === 'dashboard' ? '/' : `/${item.id}`;
-                    const isActive = pathname === path;
+          {isLoading
+            ? Array.from({ length: 3 }).map((_, index) => (
+                <SidebarGroup key={index.toString()}>
+                  <SidebarGroupLabel>
+                    <Skeleton className="bg-sidebar-border h-4 w-full rounded-full" />
+                  </SidebarGroupLabel>
+                  <SidebarGroupContent>
+                    <SidebarMenu className="space-y-2 px-2">
+                      {Array.from({ length: 3 }).map((_, index) => (
+                        <SidebarMenuItem key={index.toString()}>
+                          <Skeleton className="bg-sidebar-border h-12 w-full" />
+                        </SidebarMenuItem>
+                      ))}
+                    </SidebarMenu>
+                  </SidebarGroupContent>
+                </SidebarGroup>
+              ))
+            : navSections.map((section) => (
+                <SidebarGroup key={section.title}>
+                  <SidebarGroupLabel className="pointer-events-none text-[10px] font-black uppercase">
+                    {section.title}
+                  </SidebarGroupLabel>
+                  <SidebarGroupContent>
+                    <SidebarMenu>
+                      {section.items.map((item) => {
+                        const Icon = item.icon;
+                        const path = item.id === 'dashboard' ? '/' : `/${item.id}`;
+                        const isActive = pathname === path;
 
-                    return (
-                      <SidebarMenuItem key={item.id}>
-                        <Link href={path}>
-                          <SidebarMenuButton
-                            isActive={isActive}
-                            size="lg"
-                            tooltip={item.label}
-                            className="group-data-[collapsible=icon]:p-2! active:bg-blue-500! data-active:bg-blue-600 data-active:text-white data-active:hover:bg-blue-500 data-active:hover:text-white">
-                            <Icon className="size-4" />
-                            <div className="pointer-events-none grid flex-1 text-left">
-                              <div className="truncate leading-tight font-semibold">
-                                {item.label}
-                              </div>
-                              <div className="mt-0.5 truncate text-[10px] leading-tight">
-                                {item.description}
-                              </div>
-                            </div>
-                          </SidebarMenuButton>
-                        </Link>
-                      </SidebarMenuItem>
-                    );
-                  })}
-                </SidebarMenu>
-              </SidebarGroupContent>
-            </SidebarGroup>
-          ))}
+                        return (
+                          <SidebarMenuItem key={item.id}>
+                            <Link href={path}>
+                              <SidebarMenuButton
+                                isActive={isActive}
+                                size="lg"
+                                tooltip={item.label}
+                                className="group-data-[collapsible=icon]:p-2! active:bg-blue-500! data-active:bg-blue-600 data-active:text-white data-active:hover:bg-blue-500 data-active:hover:text-white">
+                                <Icon className="size-4" />
+                                <div className="pointer-events-none grid flex-1 text-left">
+                                  <div className="truncate leading-tight font-semibold">
+                                    {item.label}
+                                  </div>
+                                  <div className="mt-0.5 truncate text-[10px] leading-tight">
+                                    {item.description}
+                                  </div>
+                                </div>
+                              </SidebarMenuButton>
+                            </Link>
+                          </SidebarMenuItem>
+                        );
+                      })}
+                    </SidebarMenu>
+                  </SidebarGroupContent>
+                </SidebarGroup>
+              ))}
         </SidebarContent>
 
         <SidebarFooter>
           <SidebarMenu>
             <SidebarMenuItem>
-              <DropdownMenu>
-                <DropdownMenuTrigger
-                  render={
-                    <SidebarMenuButton
-                      size="lg"
-                      className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
-                      <Avatar className="size-8 rounded-lg">
-                        <AvatarImage
-                          src={data.avatar_url}
-                          alt={data.first_name}
-                          className="rounded-lg"
-                        />
-                        <AvatarFallback className="rounded-lg">
-                          {data.first_name.charAt(0)}
-                          {data.last_name.charAt(0)}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div className="grid flex-1 text-left text-sm leading-tight">
-                        <span className="truncate font-medium">
-                          {data.first_name} {data.last_name}
-                        </span>
-                        <span className="truncate text-xs font-bold capitalize">{data.role}</span>
-                      </div>
-                      <ChevronsUpDown className="ml-auto size-4" />
-                    </SidebarMenuButton>
-                  }
-                />
-
-                <DropdownMenuContent
-                  className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
-                  side={isMobile ? 'bottom' : 'right'}
-                  align="end"
-                  sideOffset={4}>
-                  <DropdownMenuGroup>
-                    <DropdownMenuLabel className="p-0 font-normal">
-                      <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                        <Avatar className="size-8 rounded-lg!">
+              {isLoading ? (
+                <Skeleton className="bg-sidebar-border h-12 w-full" />
+              ) : (
+                <DropdownMenu>
+                  <DropdownMenuTrigger
+                    render={
+                      <SidebarMenuButton
+                        size="lg"
+                        className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
+                        <Avatar className="size-8 rounded-lg">
                           <AvatarImage
-                            src={data.avatar_url}
-                            alt={data.first_name}
+                            src={data?.avatar_url ?? ''}
+                            alt={data?.first_name}
                             className="rounded-lg"
                           />
                           <AvatarFallback className="rounded-lg">
-                            {data.first_name.charAt(0)}
-                            {data.last_name.charAt(0)}
+                            {data?.first_name.charAt(0)}
+                            {data?.last_name.charAt(0)}
                           </AvatarFallback>
                         </Avatar>
                         <div className="grid flex-1 text-left text-sm leading-tight">
                           <span className="truncate font-medium">
-                            {data.first_name} {data.last_name}
+                            {data?.first_name} {data?.last_name}
                           </span>
-                          <span className="truncate text-xs font-bold capitalize">{data.role}</span>
+                          <span className="truncate text-xs font-bold capitalize">
+                            {data?.role}
+                          </span>
                         </div>
-                      </div>
-                    </DropdownMenuLabel>
-                  </DropdownMenuGroup>
+                        <ChevronsUpDown className="ml-auto size-4" />
+                      </SidebarMenuButton>
+                    }
+                  />
 
-                  <DropdownMenuSeparator />
+                  <DropdownMenuContent
+                    className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
+                    side={isMobile ? 'bottom' : 'right'}
+                    align="end"
+                    sideOffset={4}>
+                    <DropdownMenuGroup>
+                      <DropdownMenuLabel className="p-0 font-normal">
+                        <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+                          <Avatar className="size-8 rounded-lg!">
+                            <AvatarImage
+                              src={data?.avatar_url ?? ''}
+                              alt={data?.first_name}
+                              className="rounded-lg"
+                            />
+                            <AvatarFallback className="rounded-lg">
+                              {data?.first_name.charAt(0)}
+                              {data?.last_name.charAt(0)}
+                            </AvatarFallback>
+                          </Avatar>
+                          <div className="grid flex-1 text-left text-sm leading-tight">
+                            <span className="truncate font-medium">
+                              {data?.first_name} {data?.last_name}
+                            </span>
+                            <span className="truncate text-xs font-bold capitalize">
+                              {data?.role ?? ''}
+                            </span>
+                          </div>
+                        </div>
+                      </DropdownMenuLabel>
+                    </DropdownMenuGroup>
 
-                  <DropdownMenuGroup>
-                    <DropdownMenuItem
-                      onClick={() => setShowLogoutDialog(true)}
-                      className="text-destructive focus:text-destructive cursor-pointer">
-                      <LogOut />
-                      Log out
-                    </DropdownMenuItem>
-                  </DropdownMenuGroup>
-                </DropdownMenuContent>
-              </DropdownMenu>
+                    <DropdownMenuSeparator />
+
+                    <DropdownMenuGroup>
+                      <DropdownMenuItem
+                        onClick={() => setShowLogoutDialog(true)}
+                        className="text-destructive focus:text-destructive cursor-pointer">
+                        <LogOut />
+                        Log out
+                      </DropdownMenuItem>
+                    </DropdownMenuGroup>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              )}
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarFooter>

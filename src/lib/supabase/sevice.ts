@@ -1,4 +1,4 @@
-import { Database } from '@/typings/database.types';
+import type { Database } from '@/typings/database.types';
 import { ENV } from '@/typings/env';
 import { createClient } from '@supabase/supabase-js';
 

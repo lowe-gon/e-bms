@@ -1,11 +1,11 @@
 import { catchFetch } from '@/lib/try-catch';
-import { Database } from '@/typings/database.types';
-import { ResponseData } from '@/typings/index.types';
+import type { ResponseData } from '@/typings';
+import type { Database } from '@/typings/database.types';
 
 type Users = Database['public']['Tables']['users']['Row'];
 
 export async function getUser(): Promise<Users | null> {
-  const [data, error] = await catchFetch<ResponseData<Users>>('/api/users', {
+  const [data, error] = await catchFetch<ResponseData<Users>>('/api/users/me', {
     method: 'GET',
   });
 

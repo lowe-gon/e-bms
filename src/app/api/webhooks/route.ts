@@ -1,11 +1,12 @@
-import { createServiceSupabaseClient } from '@/lib/supabase/sevice';
+import database from '@/database';
+import { userTable } from '@/database/schema';
+import { withCatch } from '@/lib/try-catch';
+import type { Users } from '@/typings';
 import { verifyWebhook } from '@clerk/nextjs/webhooks';
+import { eq } from 'drizzle-orm';
 import { NextResponse, type NextRequest } from 'next/server';
 
-// Service role client bypasses Row-Level Security for server-side sync
-
 export async function POST(req: NextRequest): Promise<NextResponse> {
-  const supabase = createServiceSupabaseClient();
   try {
     // verifyWebhook automatically reads Svix headers and verifies signature
     const evt = await verifyWebhook(req);
@@ -15,24 +16,20 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     switch (eventType) {
       case 'user.created':
       case 'user.updated': {
-        const firstName = evt.data.first_name ?? '';
-        const lastName = evt.data.last_name ?? '';
-        const avatarUrl = evt.data.image_url ?? '';
-        const phoneNumber = evt.data.phone_numbers?.[0]?.phone_number ?? '';
-        const updatedAt = evt.data.updated_at;
+        const newUser = {
+          clerk_id: id ?? '',
+          first_name: evt.data.first_name ?? '',
+          last_name: evt.data.last_name ?? '',
+          avatar_url: evt.data.image_url ?? '',
+          phone_number: evt.data.phone_numbers?.[0]?.phone_number ?? '',
+          updated_at: new Date(evt.data.updated_at).toISOString(),
+        } as Users;
 
-        const { error } = await supabase.from('users').upsert(
-          {
-            clerk_id: id ?? '',
-            first_name: firstName,
-            last_name: lastName,
-            avatar_url: avatarUrl,
-            phone_number: phoneNumber,
-            updated_at: new Date(updatedAt).toISOString(),
-          },
-          {
-            onConflict: 'clerk_id',
-          },
+        const [, error] = await withCatch(
+          database.insert(userTable).values(newUser).onConflictDoUpdate({
+            target: userTable.clerk_id,
+            set: newUser,
+          }),
         );
 
         if (error) {
@@ -44,7 +41,10 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
       case 'user.deleted': {
         if (id) {
-          const { error } = await supabase.from('users').delete().eq('id', id);
+          const [, error] = await withCatch(
+            database.delete(userTable).where(eq(userTable.clerk_id, id)),
+          );
+
           if (error) {
             console.error('Supabase Delete Error:', error);
             return new NextResponse('Database deletion failed', { status: 500 });

@@ -1,7 +1,7 @@
 import BgBanner from '@/assets/images/banner.jpg';
 import LoginForm from '@/features/sign-in/components/login-form';
 import { GalleryVerticalEnd } from 'lucide-react';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 

@@ -1,4 +1,4 @@
-import { UserRole } from '@/typings/index.types';
+import type { UserRole } from '@/typings';
 import {
   BarChart3,
   Building2,
