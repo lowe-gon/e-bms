@@ -229,19 +229,19 @@ export function FormInputWithFloatingLabel<TFieldValues extends FieldValues>({
   placeholder,
   className,
   control,
-  value,
   name,
   hasGeneratePasswordButton,
+  containerClassName,
   ...props
 }: Omit<React.ComponentProps<typeof Input>, 'name'> & {
   control: Control<TFieldValues>;
   name: Path<TFieldValues>;
   label: string;
   isRequired?: boolean;
+  containerClassName?: string;
   hasGeneratePasswordButton?: boolean;
 }) {
   const [inputType, setInputType] = React.useState<React.HTMLInputTypeAttribute>(type);
-  const [hasValue, setHasValue] = React.useState<boolean>(Boolean(value));
 
   const onTogglePasswordVisibility = () => {
     setInputType((prev) => (prev === 'password' ? 'text' : 'password'));
@@ -254,8 +254,9 @@ export function FormInputWithFloatingLabel<TFieldValues extends FieldValues>({
       render={({ field, fieldState }) => {
         const isInvalid = fieldState.invalid;
         const inputId = field.name;
+        const hasValue = Boolean(field.value);
         return (
-          <Field className="relative w-full" data-invalid={isInvalid}>
+          <Field className={cn('relative w-full', containerClassName)} data-invalid={isInvalid}>
             <InputGroup
               className={cn(
                 'peer border-input focus-within:border-ring focus-within:ring-ring relative h-12 w-full items-center rounded-md border bg-transparent shadow-xs transition-colors focus-within:ring-1',
@@ -268,7 +269,6 @@ export function FormInputWithFloatingLabel<TFieldValues extends FieldValues>({
                 {...field}
                 type={inputType}
                 placeholder={placeholder}
-                value={value}
                 className={cn(
                   'text-foreground w-full bg-transparent px-3.5 pt-3 pb-1 text-base outline-none file:border-0 file:bg-transparent file:text-sm file:font-medium md:text-sm',
                   'placeholder:text-muted-foreground/50 placeholder:opacity-0 peer-data-[filled=true]:placeholder:opacity-100 focus:placeholder:opacity-100',
@@ -276,8 +276,6 @@ export function FormInputWithFloatingLabel<TFieldValues extends FieldValues>({
                   className,
                 )}
                 onChange={(e) => {
-                  const newValue = e.target.value;
-                  setHasValue(newValue.length > 0);
                   field.onChange?.(e);
                   props.onChange?.(e);
                 }}
@@ -358,10 +356,11 @@ export function FormInputSelectGroup<TFieldValues extends FieldValues>({
   label,
   options,
   isRequired,
+  containerClassName,
   ...props
 }: Omit<React.ComponentProps<typeof Select>, 'name'> & {
   label: string;
-
+  containerClassName?: string;
   options: Array<{
     value: string;
     label: string;
@@ -378,7 +377,7 @@ export function FormInputSelectGroup<TFieldValues extends FieldValues>({
         const isInvalid = fieldState.invalid;
         const hasValue = field.value !== undefined && field.value !== null && field.value !== '';
         return (
-          <Field className="relative w-full" data-invalid={isInvalid}>
+          <Field className={cn('relative w-full', containerClassName)} data-invalid={isInvalid}>
             <Select {...props} items={options} {...field} onValueChange={(e) => field.onChange(e)}>
               <SelectTrigger
                 aria-invalid={isInvalid}

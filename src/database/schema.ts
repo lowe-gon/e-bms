@@ -18,7 +18,10 @@ export const userTable = pgTable.withRLS(
     sector_id: uuid('sector_id').references(() => sectorTable.id),
     first_name: text('first_name').default('').notNull(),
     last_name: text('last_name').default('').notNull(),
+    email_address: text('email_address').unique(),
+    username: text('username').unique(),
     phone_number: text('phone_number').default('').notNull(),
+    last_sign_in_at: timestamp({ withTimezone: true, mode: 'string' }).defaultNow(),
     role: roleEnum('role').default('captain').notNull(),
     created_at: timestamp({ withTimezone: true, mode: 'string' }).defaultNow().notNull(),
     updated_at: timestamp({ withTimezone: true, mode: 'string' })

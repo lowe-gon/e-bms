@@ -2,15 +2,15 @@ import type { Database } from '@/typings/database.types';
 
 export type UserRole = 'captain' | 'secretary' | 'treasurer' | 'councilor';
 
-export type ResponseMetaData = {
+export type ResponseMetadata = {
   limit: number;
   page: number;
-  pageSize: number;
-  totalPages: number;
+  pageSize?: number;
+  totalPages?: number;
 };
 
 export type ResponseData<TData> = {
-  metadata: ResponseMetaData | null;
+  metadata: ResponseMetadata | null;
   data: TData;
 };
 

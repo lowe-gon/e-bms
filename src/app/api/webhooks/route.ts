@@ -22,6 +22,11 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
           last_name: evt.data.last_name ?? '',
           avatar_url: evt.data.image_url ?? '',
           phone_number: evt.data.phone_numbers?.[0]?.phone_number ?? '',
+          username: evt.data.username ?? null,
+          email_address: evt.data.email_addresses?.[0]?.email_address ?? null,
+          last_sign_in_at: evt.data.last_sign_in_at
+            ? new Date(evt.data.last_sign_in_at).toISOString()
+            : null,
           updated_at: new Date(evt.data.updated_at).toISOString(),
         } as Users;
 

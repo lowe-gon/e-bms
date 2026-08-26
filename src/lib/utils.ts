@@ -16,24 +16,37 @@ export function toSnakeCase(str: string): string {
   return str.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`);
 }
 
-/**
- * Converts a given string to camelCase format.
- *
- * This utility function takes a string as input and transforms it into camelCase
- * by replacing underscores followed by a lowercase letter with the uppercase version
- * of that letter. It is useful for converting snake_case strings to camelCase.
- *
- * @param str - The input string to be converted to camelCase.
- * @returns The camelCase formatted string.
- *
- * @example
- * ```typescript
- * const result = toCamelCase("example_string");
- * console.log(result); // "exampleString"
- * ```
- */
 export function toCamelCase(str: string): string {
   return str.replace(/_([a-z])/g, (_, letter: string) => letter.toUpperCase());
+}
+
+/**
+ * Get currency symbols
+ * @param {string} currency - The ISO currency code (default: 'USD')
+ * @param {string} locale - The BCP 47 language tag (default: 'en-US')
+ * @returns
+ */
+export function getCurrencySymbol(currency: string = 'PHP', locale: string = 'en-US'): string {
+  if (!currency) return '';
+
+  try {
+    const formatter = new Intl.NumberFormat(locale, {
+      style: 'currency',
+      currency: currency,
+    });
+
+    if (typeof formatter.formatToParts === 'function') {
+      const parts = formatter.formatToParts(0);
+      const currencyPart = parts.find((p) => p.type === 'currency');
+      return currencyPart ? currencyPart.value : currency;
+    }
+
+    const formatted = formatter.format(0);
+    return formatted.replace(/[\d.,\s]+/g, '').trim();
+  } catch (e) {
+    console.error(e);
+    return currency;
+  }
 }
 
 export function fileToDataUrl(file: File | Blob): Promise<string> {

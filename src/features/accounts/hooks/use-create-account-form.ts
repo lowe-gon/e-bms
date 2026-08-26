@@ -1,4 +1,4 @@
-import useCreateUserMutation from '@/features/accounts/hooks/use-create-user-mutation';
+import useUpsertUserMutation from '@/features/accounts/hooks/use-upsert-user-mutation';
 import { NewUserSchema, type NewUserSchemaProps } from '@/features/accounts/schema/new-user.schema';
 import useZodForm from '@/hooks/use-zod-form';
 import React from 'react';
@@ -12,18 +12,22 @@ export default function useCreateAccountForm() {
       lastName: '',
       phoneNumber: '',
       role: '',
+      email: '',
       username: '',
       password: '',
     },
     schema: NewUserSchema,
   });
 
-  const { mutateAsync } = useCreateUserMutation();
+  const { mutateAsync } = useUpsertUserMutation();
 
   const onSubmitHandler: SubmitHandler<NewUserSchemaProps> = React.useCallback(
     async (data) => {
       try {
-        await mutateAsync(data);
+        await mutateAsync({
+          data,
+          mode: 'create',
+        });
         toast.success('Successfully created account 🎉');
       } catch (error) {
         console.error(error);

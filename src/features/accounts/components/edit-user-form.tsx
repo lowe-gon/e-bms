@@ -9,9 +9,9 @@ import {
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { DialogClose } from '@/components/ui/dialog';
 import { FieldGroup } from '@/components/ui/field';
-import useCreateAccountForm from '@/features/accounts/hooks/use-create-account-form';
-import type { UserRole } from '@/typings';
+import type { UserRole, Users } from '@/typings';
 import { CheckCircle2 } from 'lucide-react';
+import useEditUserForm from '../hooks/use-edit-user.form';
 
 // Permission chips preview helper
 export const getPermissionsList = (role: UserRole) => {
@@ -60,8 +60,8 @@ export const getPermissionsList = (role: UserRole) => {
   }
 };
 
-export default function CreateAccountForm() {
-  const { form, roleValue, fullNameValue, onSubmitHandler } = useCreateAccountForm();
+export default function EditUserForm(user: Users) {
+  const { form, roleValue, fullNameValue, onSubmitHandler } = useEditUserForm(user);
 
   const permissionsList = getPermissionsList(roleValue as UserRole);
 
@@ -163,38 +163,10 @@ export default function CreateAccountForm() {
           </Card>
         ) : null}
 
-        <FieldGroup className="grid gap-3 md:grid-cols-2">
-          <div className="flex w-full items-center justify-between md:col-span-2">
-            <h2 className="font-bold">
-              System Login Credentials <span className="text-destructive">*</span>
-            </h2>
-            <span className="rounded-full bg-blue-100 px-2 py-0.5 text-[10px] font-semibold text-blue-700 dark:bg-blue-900/60 dark:text-blue-300">
-              Official Portal Auth
-            </span>
-          </div>
-
-          <FormInputWithFloatingLabel
-            name="username"
-            control={form.control}
-            label="Username"
-            placeholder="juandelacruz"
-            disabled={form.formState.isSubmitting}
-          />
-
-          <FormInputWithFloatingLabel
-            type="password"
-            name="password"
-            control={form.control}
-            label="Password"
-            disabled={form.formState.isSubmitting}
-          />
-        </FieldGroup>
-
-        <div className="grid gap-2 md:grid-cols-2">
-          <div className="col-span-1"></div>
-          <div className="col-span-1 flex items-center gap-3">
-            <DialogClose disabled={form.formState.isSubmitting}>Cancel</DialogClose>
-            <FormButton disabled={form.formState.isSubmitting}>Create Official Account</FormButton>
+        <div className="flex items-center justify-end gap-3">
+          <DialogClose disabled={form.formState.isSubmitting}>Cancel</DialogClose>
+          <div>
+            <FormButton disabled={form.formState.isSubmitting}>Save Changes</FormButton>
           </div>
         </div>
       </form>

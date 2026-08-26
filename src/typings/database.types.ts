@@ -4,7 +4,7 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: '14.15';
+    PostgrestVersion: '14.17';
   };
   public: {
     Tables: {
@@ -40,37 +40,46 @@ export type Database = {
           avatar_url: string;
           clerk_id: string;
           created_at: string;
+          email_address: string | null;
           first_name: string;
           id: string;
           last_name: string;
+          last_sign_in_at: string | null;
           phone_number: string;
           role: Database['public']['Enums']['role'];
           sector_id: string | null;
           updated_at: string;
+          username: string | null;
         };
         Insert: {
           avatar_url?: string;
           clerk_id: string;
           created_at?: string;
+          email_address?: string | null;
           first_name?: string;
           id?: string;
           last_name?: string;
+          last_sign_in_at?: string | null;
           phone_number?: string;
           role?: Database['public']['Enums']['role'];
           sector_id?: string | null;
           updated_at?: string;
+          username?: string | null;
         };
         Update: {
           avatar_url?: string;
           clerk_id?: string;
           created_at?: string;
+          email_address?: string | null;
           first_name?: string;
           id?: string;
           last_name?: string;
+          last_sign_in_at?: string | null;
           phone_number?: string;
           role?: Database['public']['Enums']['role'];
           sector_id?: string | null;
           updated_at?: string;
+          username?: string | null;
         };
         Relationships: [
           {
