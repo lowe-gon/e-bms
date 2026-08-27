@@ -6,8 +6,10 @@ import {
   type ColumnDef,
   type ColumnFiltersState,
   type ColumnVisibilityState,
+  type PaginationState,
   type RowData,
   type SortingState,
+  type Updater,
 } from '@tanstack/react-table';
 import React from 'react';
 
@@ -15,12 +17,21 @@ export type UseTableProps<TData extends RowData & { id: string }> = {
   initialData: TData[];
   columns: ColumnDef<typeof features, TData>[];
   devtoolKey?: string;
+  pageIndex?: number;
+  pageSize?: number;
+  pageCount?: number;
+  onPaginationChange?: (updater: Updater<PaginationState>) => void;
+  onDataChange?: (newData: TData[]) => void;
 };
 
 export default function useTable<TData extends RowData & { id: string }>({
   initialData,
   columns,
   devtoolKey = 'table-key',
+  pageIndex = 0,
+  pageSize = 10,
+  pageCount = -1,
+  onDataChange,
 }: UseTableProps<TData>) {
   const [data, setData] = React.useState<TData[]>(initialData);
 
@@ -29,16 +40,36 @@ export default function useTable<TData extends RowData & { id: string }>({
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = React.useState('');
   const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [pagination, setPagination] = React.useState({
-    pageIndex: 0,
-    pageSize: 10,
+  const [pagination, setPagination] = React.useState<PaginationState>({
+    pageIndex,
+    pageSize,
   });
+
+  const _onPaginationChange = React.useCallback((updater: Updater<PaginationState>) => {
+    setPagination((prev) => {
+      const nextState = typeof updater === 'function' ? updater(prev) : updater;
+
+      if (nextState.pageSize !== prev.pageSize) {
+        return {
+          pageIndex: 0,
+          pageSize: nextState.pageSize,
+        };
+      }
+
+      return {
+        ...prev,
+        pageIndex: nextState.pageIndex,
+      };
+    });
+  }, []);
 
   const table = useReactTable({
     key: devtoolKey,
     data,
     features,
     columns,
+    pageCount,
+    manualPagination: true,
     state: {
       sorting,
       columnVisibility,
@@ -63,7 +94,7 @@ export default function useTable<TData extends RowData & { id: string }>({
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
-    onPaginationChange: setPagination,
+    onPaginationChange: _onPaginationChange,
     onGlobalFilterChange: setGlobalFilter,
   });
 
@@ -73,13 +104,16 @@ export default function useTable<TData extends RowData & { id: string }>({
     })();
   }, [initialData]);
 
-  const onDndDragEnd = React.useCallback((e: DragEndEvent) => {
-    if (e.canceled) return;
-    const { source, target } = e.operation;
-    if (source && target && source.id !== target.id) {
-      setData((items) => move(items, e));
-    }
-  }, []);
+  const onDndDragEnd = React.useCallback(
+    (e: DragEndEvent) => {
+      if (e.canceled) return;
+      const { source, target } = e.operation;
+      if (source && target && source.id !== target.id && onDataChange) {
+        onDataChange(move(data, e));
+      }
+    },
+    [onDataChange, data],
+  );
 
   const columnFiltered = React.useCallback(
     (filteredId: string) => {

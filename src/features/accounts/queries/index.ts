@@ -4,8 +4,8 @@ import { upsertUserAccount } from '@/features/accounts/api/upsert-user-account';
 import type { EditUserSchemaProps } from '@/features/accounts/schema/edit-user.schema';
 import type { NewUserSchemaProps } from '@/features/accounts/schema/new-user.schema';
 import { getQueryClient } from '@/lib/query-client';
-import type { Users } from '@/typings';
-import { infiniteQueryOptions, type UseMutationOptions } from '@tanstack/react-query';
+import type { ResponseMetadata, Users } from '@/typings';
+import { queryOptions, type UseMutationOptions } from '@tanstack/react-query';
 
 type UpsertMutationVariables =
   | { mode: 'create'; data: NewUserSchemaProps }
@@ -26,28 +26,37 @@ export function upertUserAccountMutationOptions(): UseMutationOptions<
         return upsertUserAccount({ mode: 'edit', data: variables.data, userId: variables.userId });
       }
     },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['users'] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['users'], refetchType: 'active' }),
   };
 }
 
-export function getUsersInfiniteQueryOptions() {
-  return infiniteQueryOptions({
-    queryKey: ['users'],
-    queryFn: ({ pageParam }) =>
+export function getUsersQueryOptions({
+  searchQuery,
+  sortBy,
+  sortOrder,
+  limit,
+  page,
+}: ResponseMetadata) {
+  return queryOptions({
+    queryKey: [
+      'users',
+      {
+        searchQuery,
+        sortBy,
+        sortOrder,
+        limit,
+        page,
+      },
+    ],
+    queryFn: () =>
       getUsers({
-        limit: 10,
-        page: pageParam,
+        limit: limit,
+        page: page,
+        searchQuery: searchQuery ?? '',
+        sortBy: sortBy ?? '',
+        sortOrder: sortOrder ?? 'asc',
       }),
-    initialPageParam: 1,
-    getNextPageParam: (lastPage) => {
-      const { page, totalPages } = lastPage.metadata || { page: 1, totalPages: 1 };
-      return page < (totalPages ?? 1) ? page + 1 : undefined;
-    },
-    getPreviousPageParam: (firstPage) => {
-      const { page } = firstPage.metadata || { page: 1 };
-      return page > 1 ? page - 1 : undefined;
-    },
-    maxPages: 3,
+    placeholderData: (previousData) => previousData,
   });
 }
 
@@ -56,6 +65,6 @@ export function deleteUserAccountMutationOptions() {
   return {
     mutationKey: ['users'],
     mutationFn: async (userId: string) => await deleteUser(userId),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['users'] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['users'], refetchType: 'active' }),
   };
 }

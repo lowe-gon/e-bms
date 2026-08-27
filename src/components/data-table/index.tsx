@@ -9,30 +9,29 @@ import {
   type RowData,
   type TableState,
 } from '@tanstack/react-table';
-import type React from 'react';
+import { Skeleton } from '../ui/skeleton';
 import DataTableHeader from './data-table-header';
+import { DataTablePagination } from './data-table.pagination';
 
 type DataTableProps<TData extends RowData & { id: string }> = {
   table: ReactTable<typeof features, TData, TableState<typeof features>>;
-  renderHeader?: React.ReactNode;
   notFoundText?: string;
   columns: ColumnDef<typeof features, TData>[];
-
+  isLoading?: boolean;
   onDragEnd: (e: DragEndEvent) => void;
 };
 
 export default function DataTable<TData extends RowData & { id: string }>({
   table,
-  renderHeader,
   notFoundText = 'No result found',
   columns,
+  isLoading = false,
   onDragEnd,
 }: DataTableProps<TData>) {
   return (
     <>
       <Card className="p-0">
         <CardContent className="p-0">
-          {renderHeader}
           <DragDropProvider onDragEnd={onDragEnd}>
             <Table>
               <TableHeader>
@@ -40,9 +39,18 @@ export default function DataTable<TData extends RowData & { id: string }>({
                   <DataTableHeader key={headerGroups.id} headerGroups={headerGroups} />
                 ))}
               </TableHeader>
-
               <TableBody>
-                {table.getRowModel().rows.length > 0 ? (
+                {isLoading ? (
+                  Array.from({ length: 5 }).map((_, rowIndex) => (
+                    <TableRow key={`skeleton-row-${rowIndex}`}>
+                      {columns.map((_, colIndex) => (
+                        <TableCell key={`skeleton-col-${colIndex}`}>
+                          <Skeleton className="h-6 w-full" />
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  ))
+                ) : table.getRowModel().rows.length > 0 ? (
                   table
                     .getRowModel()
                     .rows.map((row) => <DraggableTableBody key={row.id} row={row} />)
@@ -58,6 +66,8 @@ export default function DataTable<TData extends RowData & { id: string }>({
           </DragDropProvider>
         </CardContent>
       </Card>
+
+      <DataTablePagination table={table} />
     </>
   );
 }

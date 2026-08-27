@@ -106,7 +106,10 @@ export default function ActionCell(props: Users) {
               <AlertDialogCancel>Cancel</AlertDialogCancel>
               <AlertDialogAction
                 className="bg-destructive hover:bg-destructive/90"
-                onClick={async () => mutateAsync(props.clerk_id)}>
+                onClick={async () => {
+                  mutateAsync(props.clerk_id);
+                  router.back();
+                }}>
                 Yes, I&apos;m sure
               </AlertDialogAction>
             </AlertDialogFooter>

@@ -7,6 +7,9 @@ export type ResponseMetadata = {
   page: number;
   pageSize?: number;
   totalPages?: number;
+  searchQuery?: string;
+  sortBy?: string;
+  sortOrder?: 'asc' | 'desc';
 };
 
 export type ResponseData<TData> = {

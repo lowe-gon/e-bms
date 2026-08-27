@@ -128,11 +128,9 @@ export const POST = withAuth(async (req) => {
 
   const [data, error] = await withCatch(
     database
-      .insert(userTable)
-      .values({
-        clerk_id: newUser.id,
-        role: role as Users['role'],
-      })
+      .update(userTable)
+      .set({ role: role as Users['role'] })
+      .where(eq(userTable.clerk_id, newUser.id))
       .returning(),
   );
 

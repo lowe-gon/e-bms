@@ -24,7 +24,8 @@ export function parseQueryParams(req: NextRequest, options: QueryOptions = {}) {
   const status = searchParams.get('status') || undefined;
 
   // Sorting
-  const sortBy = searchParams.get('sortBy') || 'createdAt';
+  const rawSortBy = searchParams.get('sortBy') || 'created_at';
+  const sortBy = rawSortBy.includes('|') ? rawSortBy.split('|') : rawSortBy;
   const sortOrder = searchParams.get('sortOrder') === 'asc' ? 'asc' : 'desc';
 
   return {
