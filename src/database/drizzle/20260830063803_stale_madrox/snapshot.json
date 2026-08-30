@@ -2,17 +2,10 @@
   "version": "8",
   "dialect": "postgres",
   "id": "4588676c-1a45-4a90-b2c9-354368951a39",
-  "prevIds": [
-    "0effef51-3d26-4013-b8f9-10399d6546be"
-  ],
+  "prevIds": ["0effef51-3d26-4013-b8f9-10399d6546be"],
   "ddl": [
     {
-      "values": [
-        "captain",
-        "secretary",
-        "councilor",
-        "treasurer"
-      ],
+      "values": ["captain", "secretary", "councilor", "treasurer"],
       "name": "role",
       "entityType": "enums",
       "schema": "public"
@@ -368,14 +361,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "sector_id"
-      ],
+      "columns": ["sector_id"],
       "schemaTo": "public",
       "tableTo": "sectors",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "CASCADE",
       "onDelete": "CASCADE",
       "name": "sector_to_puroks_sector_id_sectors_id_fkey",
@@ -385,14 +374,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "purok_id"
-      ],
+      "columns": ["purok_id"],
       "schemaTo": "public",
       "tableTo": "puroks",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "CASCADE",
       "onDelete": "RESTRICT",
       "name": "sector_to_puroks_purok_id_puroks_id_fkey",
@@ -402,14 +387,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "sector_id"
-      ],
+      "columns": ["sector_id"],
       "schemaTo": "public",
       "tableTo": "sectors",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "SET NULL",
       "name": "users_sector_id_sectors_id_fkey",
@@ -418,10 +399,7 @@
       "table": "users"
     },
     {
-      "columns": [
-        "sector_id",
-        "purok_id"
-      ],
+      "columns": ["sector_id", "purok_id"],
       "nameExplicit": false,
       "name": "sector_to_puroks_pkey",
       "entityType": "pks",
@@ -429,9 +407,7 @@
       "table": "sector_to_puroks"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "puroks_pkey",
       "schema": "public",
@@ -439,9 +415,7 @@
       "entityType": "pks"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "sectors_pkey",
       "schema": "public",
@@ -449,9 +423,7 @@
       "entityType": "pks"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "users_pkey",
       "schema": "public",
@@ -460,9 +432,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "name"
-      ],
+      "columns": ["name"],
       "nullsNotDistinct": false,
       "name": "puroks_name_key",
       "schema": "public",
@@ -471,9 +441,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "name"
-      ],
+      "columns": ["name"],
       "nullsNotDistinct": false,
       "name": "sectors_name_key",
       "schema": "public",
@@ -482,9 +450,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "clerk_id"
-      ],
+      "columns": ["clerk_id"],
       "nullsNotDistinct": false,
       "name": "users_clerk_id_key",
       "schema": "public",
@@ -493,9 +459,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "email_address"
-      ],
+      "columns": ["email_address"],
       "nullsNotDistinct": false,
       "name": "users_email_address_key",
       "schema": "public",
@@ -504,9 +468,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "username"
-      ],
+      "columns": ["username"],
       "nullsNotDistinct": false,
       "name": "users_username_key",
       "schema": "public",
@@ -516,9 +478,7 @@
     {
       "as": "PERMISSIVE",
       "for": "INSERT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": null,
       "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "name": "Purok Insert Policy",
@@ -529,9 +489,7 @@
     {
       "as": "PERMISSIVE",
       "for": "SELECT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": null,
       "name": "Purok Select Policy",
@@ -542,9 +500,7 @@
     {
       "as": "PERMISSIVE",
       "for": "UPDATE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "name": "Purok Update Policy",
@@ -555,9 +511,7 @@
     {
       "as": "PERMISSIVE",
       "for": "DELETE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": null,
       "name": "Purok Delete Policy",
@@ -568,9 +522,7 @@
     {
       "as": "PERMISSIVE",
       "for": "INSERT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": null,
       "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "name": "Sector Insert Policy",
@@ -581,9 +533,7 @@
     {
       "as": "PERMISSIVE",
       "for": "SELECT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": null,
       "name": "Sector Select Policy",
@@ -594,9 +544,7 @@
     {
       "as": "PERMISSIVE",
       "for": "UPDATE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "name": "Sector Update Policy",
@@ -607,9 +555,7 @@
     {
       "as": "PERMISSIVE",
       "for": "DELETE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": null,
       "name": "Sector Delete Policy",
@@ -620,9 +566,7 @@
     {
       "as": "PERMISSIVE",
       "for": "INSERT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": null,
       "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "name": "SectorToPurok Insert Policy",
@@ -633,9 +577,7 @@
     {
       "as": "PERMISSIVE",
       "for": "SELECT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": null,
       "name": "SectorToPurok Select Policy",
@@ -646,9 +588,7 @@
     {
       "as": "PERMISSIVE",
       "for": "UPDATE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "name": "SectorToPurok Update Policy",
@@ -659,9 +599,7 @@
     {
       "as": "PERMISSIVE",
       "for": "DELETE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": null,
       "name": "SectorToPurok Delete Policy",
@@ -672,9 +610,7 @@
     {
       "as": "PERMISSIVE",
       "for": "INSERT",
-      "roles": [
-        "service_role"
-      ],
+      "roles": ["service_role"],
       "using": null,
       "withCheck": "true",
       "name": "User Insert Policy",
@@ -685,9 +621,7 @@
     {
       "as": "PERMISSIVE",
       "for": "SELECT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "(select auth.jwt() ->> 'sub') = (clerk_id)::text",
       "withCheck": null,
       "name": "User Select Policy",
@@ -698,9 +632,7 @@
     {
       "as": "PERMISSIVE",
       "for": "UPDATE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "(select auth.jwt() ->> 'sub') = (clerk_id)::text",
       "withCheck": "(select auth.jwt() ->> 'sub') = (clerk_id)::text",
       "name": "User Update Policy",
@@ -711,9 +643,7 @@
     {
       "as": "PERMISSIVE",
       "for": "DELETE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "(select auth.jwt() ->> 'sub') = (clerk_id)::text",
       "withCheck": null,
       "name": "User Delete Policy",
