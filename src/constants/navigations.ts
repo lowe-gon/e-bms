@@ -101,7 +101,7 @@ export const getNavSections = (role: UserRole, sector?: SectorName) => {
 
   const SectorIcon = getSectorIcon(sector);
   const committeeItem: NavItem = {
-    id: 'sectors',
+    id: 'committee',
     label: sector ? `Committee: ${sector}` : 'Standing Committees',
     icon: SectorIcon,
     description: 'Thematic Areas',
@@ -109,7 +109,7 @@ export const getNavSections = (role: UserRole, sector?: SectorName) => {
   };
 
   const geoSectorItem: NavItem = {
-    id: 'geographic-sectors',
+    id: 'sectors',
     label: 'Geographic Sectors',
     icon: Compass,
     description: 'Zones & Mapping',

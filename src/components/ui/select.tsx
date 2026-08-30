@@ -1,10 +1,10 @@
 'use client';
 
-import * as React from 'react';
 import { Select as SelectPrimitive } from '@base-ui/react/select';
+import * as React from 'react';
 
 import { cn } from '@/lib/utils';
-import { ChevronDownIcon, CheckIcon, ChevronUpIcon } from 'lucide-react';
+import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from 'lucide-react';
 
 const Select = SelectPrimitive.Root;
 
@@ -112,7 +112,7 @@ function SelectItem({ className, children, ...props }: SelectPrimitive.Item.Prop
         className,
       )}
       {...props}>
-      <SelectPrimitive.ItemText className="flex flex-1 shrink-0 gap-2 whitespace-nowrap">
+      <SelectPrimitive.ItemText className="flex flex-1 shrink-0 items-center gap-2 whitespace-nowrap">
         {children}
       </SelectPrimitive.ItemText>
       <SelectPrimitive.ItemIndicator

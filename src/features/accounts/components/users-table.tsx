@@ -2,19 +2,19 @@
 
 import DataTable from '@/components/data-table';
 import DebounceInput from '@/components/debounce-input';
-import { PAGE_LIMIT } from '@/constants';
 import { columns } from '@/features/accounts/components/users-table-columns';
-import useGetUsersGetAllQuery from '@/features/accounts/hooks/use-users-get-all-query';
+import useGetAllUsersQueryOptions from '@/features/user/hooks/use-users-get-all-query';
 import useTable from '@/hooks/use-table';
 import React from 'react';
 
 export default function UsersTable() {
   const [searchQuery, setSearchQuery] = React.useState<string>('');
   const [pageIndex, setPageIndex] = React.useState(0);
+  const [pageSize, setPageSize] = React.useState(10);
 
-  const { data, isFetching: isLoading } = useGetUsersGetAllQuery({
+  const { data, isFetching: isLoading } = useGetAllUsersQueryOptions({
     searchQuery: searchQuery,
-    limit: PAGE_LIMIT,
+    limit: pageSize,
     page: pageIndex + 1,
   });
 
@@ -25,7 +25,7 @@ export default function UsersTable() {
     devtoolKey: 'table-staff',
     initialData: usersData,
     columns: columns,
-    pageSize: PAGE_LIMIT,
+    pageSize: pageSize,
     pageIndex: pageIndex,
     pageCount: totalCount,
   });
@@ -33,6 +33,7 @@ export default function UsersTable() {
   React.useEffect(() => {
     (() => {
       setPageIndex(table.state.pagination.pageIndex);
+      setPageSize(table.state.pagination.pageSize);
     })();
   }, [table]);
 

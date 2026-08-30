@@ -5,15 +5,30 @@ import React from 'react';
 export type Theme = 'dark' | 'light';
 
 function subscribe(callback: () => void) {
+  // Listen to class attribute changes on <html>
   const observer = new MutationObserver(callback);
   observer.observe(document.documentElement, {
     attributes: true,
     attributeFilter: ['class'],
   });
-  return () => observer.disconnect();
+
+  // Listen to localStorage changes across tabs/windows
+  window.addEventListener('storage', callback);
+
+  return () => {
+    observer.disconnect();
+    window.removeEventListener('storage', callback);
+  };
 }
 
 function getSnapshot(): Theme {
+  // Check localStorage first if available, fallback to DOM class
+  if (typeof window !== 'undefined') {
+    const storedTheme = localStorage.getItem('theme') as Theme;
+    if (storedTheme === 'dark' || storedTheme === 'light') {
+      return storedTheme;
+    }
+  }
   return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
 }
 
@@ -24,8 +39,19 @@ function getServerSnapshot(): Theme {
 export function useTheme() {
   const theme = React.useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
+  // Sync initial theme to DOM on mount if mismatched
+  React.useEffect(() => {
+    const storedTheme = localStorage.getItem('theme') as Theme;
+    if (storedTheme) {
+      document.documentElement.classList.toggle('dark', storedTheme === 'dark');
+    }
+  }, []);
+
   const toggleTheme = (event: React.MouseEvent<HTMLButtonElement>) => {
     const nextTheme = theme === 'dark' ? 'light' : 'dark';
+
+    // Save to local storage immediately
+    localStorage.setItem('theme', nextTheme);
 
     const rect = event.currentTarget.getBoundingClientRect();
     const x = rect.left + rect.width / 2;
@@ -38,13 +64,11 @@ export function useTheme() {
 
     if (!document.startViewTransition) {
       document.documentElement.classList.toggle('dark', nextTheme === 'dark');
-      localStorage.setItem('theme', nextTheme);
       return;
     }
 
     const transition = document.startViewTransition(() => {
       document.documentElement.classList.toggle('dark', nextTheme === 'dark');
-      localStorage.setItem('theme', nextTheme);
     });
 
     transition.ready.then(() => {

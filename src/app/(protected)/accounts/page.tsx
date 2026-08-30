@@ -1,5 +1,11 @@
 import AccountBanner from '@/features/accounts/components/banner';
 import UsersTable from '@/features/accounts/components/users-table';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Accounts & Role',
+  description: '',
+};
 
 export default function AccountsPage() {
   return (

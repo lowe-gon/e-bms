@@ -1,16 +1,16 @@
-import { getUsersQueryOptions } from '@/features/accounts/queries';
+import { getAllUsersQueryOptions } from '@/features/user/queries';
 import type { ResponseMetadata } from '@/typings';
 import { useQuery } from '@tanstack/react-query';
 
-export default function useGetUsersGetAllQuery({
+export default function useGetAllUsersQueryOptions({
   searchQuery = '',
   sortOrder = 'asc',
   sortBy = 'created_at',
   limit = 10,
-  page,
+  page = 1,
 }: ResponseMetadata) {
   return useQuery(
-    getUsersQueryOptions({
+    getAllUsersQueryOptions({
       searchQuery,
       sortBy,
       sortOrder,

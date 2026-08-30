@@ -63,6 +63,8 @@ export const GET = withAuth(async (req) => {
       pageSize: data.length,
       totalPages: totalPages,
     },
+    success: false,
+    message: '',
     data: data ? data : [],
   };
 

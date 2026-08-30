@@ -19,6 +19,7 @@ import { CheckCircle, Eye, EyeOff, Sparkle, Upload } from 'lucide-react';
 import Image from 'next/image';
 import React from 'react';
 import { Controller, type Control, type FieldValues, type Path } from 'react-hook-form';
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 
 export function FormInput<TFieldValues extends FieldValues>({
   ref,
@@ -357,6 +358,7 @@ export function FormInputSelectGroup<TFieldValues extends FieldValues>({
   options,
   isRequired,
   containerClassName,
+  notFoundText = 'No options found',
   ...props
 }: Omit<React.ComponentProps<typeof Select>, 'name'> & {
   label: string;
@@ -364,10 +366,12 @@ export function FormInputSelectGroup<TFieldValues extends FieldValues>({
   options: Array<{
     value: string;
     label: string;
+    image?: string;
   }>;
   isRequired?: boolean;
   control: Control<TFieldValues>;
   name: Path<TFieldValues>;
+  notFoundText?: string;
 }) {
   return (
     <Controller
@@ -387,11 +391,24 @@ export function FormInputSelectGroup<TFieldValues extends FieldValues>({
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  {options.map((opt) => (
-                    <SelectItem key={opt.value} value={opt.value}>
-                      {opt.label}
-                    </SelectItem>
-                  ))}
+                  {options.length ? (
+                    options.map((opt) => (
+                      <SelectItem key={opt.value} value={opt.value}>
+                        {opt.image && (
+                          <Avatar>
+                            <AvatarImage src={opt.image} alt={opt.label} />
+                            <AvatarFallback>{opt.label.charAt(0)}</AvatarFallback>
+                          </Avatar>
+                        )}
+
+                        <span>{opt.label}</span>
+                      </SelectItem>
+                    ))
+                  ) : (
+                    <div className="flex items-center justify-center py-2">
+                      <span className="text-center text-sm font-bold">{notFoundText}</span>
+                    </div>
+                  )}
                 </SelectGroup>
               </SelectContent>
             </Select>

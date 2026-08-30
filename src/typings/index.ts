@@ -13,8 +13,18 @@ export type ResponseMetadata = {
 };
 
 export type ResponseData<TData> = {
+  success: boolean;
   metadata: ResponseMetadata | null;
   data: TData;
+  message: string;
 };
 
 export type Users = Database['public']['Tables']['users']['Row'];
+export type Sectors = Database['public']['Tables']['sectors']['Row'];
+export type Puroks = Database['public']['Tables']['puroks']['Row'];
+
+export type UserWithSectorAndPurok = Users & {
+  sector: Sectors & {
+    puroks: Puroks[];
+  };
+};

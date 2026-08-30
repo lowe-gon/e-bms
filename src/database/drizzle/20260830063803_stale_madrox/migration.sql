@@ -1,0 +1,2 @@
+ALTER TABLE "sector_to_puroks" DROP CONSTRAINT "sector_to_puroks_purok_id_puroks_id_fkey", ADD CONSTRAINT "sector_to_puroks_purok_id_puroks_id_fkey" FOREIGN KEY ("purok_id") REFERENCES "puroks"("id") ON DELETE RESTRICT ON UPDATE CASCADE;--> statement-breakpoint
+ALTER TABLE "users" DROP CONSTRAINT "users_sector_id_sectors_id_fkey", ADD CONSTRAINT "users_sector_id_sectors_id_fkey" FOREIGN KEY ("sector_id") REFERENCES "sectors"("id") ON DELETE SET NULL;
