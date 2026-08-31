@@ -1,145 +1,265 @@
 import { STATUS_CODE } from '@/constants/http-status-code';
 import database from '@/database';
 import { userTable } from '@/database/schema';
-import { EditUserSchema } from '@/features/accounts/schema/edit-user.schema';
-import { NewUserSchema } from '@/features/accounts/schema/new-user.schema';
+import { CreateUserSchema, EditUserSchema } from '@/features/accounts/schema/user.scheme';
 import { withAuth } from '@/helpers/with-auth';
 import { parseQueryParams } from '@/lib/parse-query';
 import { parseRequest } from '@/lib/parse-request';
 import { withCatch } from '@/lib/try-catch';
-import type { Users } from '@/typings';
+import type { ResponseData, Users } from '@/typings';
 import { clerkClient } from '@clerk/nextjs/server';
 import { eq } from 'drizzle-orm';
 import { NextResponse } from 'next/server';
 
-export const POST = withAuth(async (req) => {
-  const { raw } = parseQueryParams(req);
-  const mode = raw.get('mode') || 'create';
-  const userId = raw.get('userId') || '';
+export const POST = withAuth(async (req): Promise<NextResponse<ResponseData<Users | null>>> => {
+  try {
+    const parsedSchema = await parseRequest(req, CreateUserSchema);
 
-  const targetSchema = mode === 'edit' ? EditUserSchema : NewUserSchema;
-  const parsed = await parseRequest(req, targetSchema);
-
-  if (!parsed.success) {
-    return parsed.response;
-  }
-
-  const { firstName, lastName, role, image } = parsed.data;
-  const client = await clerkClient();
-
-  if (mode === 'edit') {
-    if (!userId) {
-      return NextResponse.json(
-        { message: 'User ID is required for editing.' },
-        { status: STATUS_CODE.BAD_REQUEST },
-      );
+    if (!parsedSchema.success) {
+      return parsedSchema.response;
     }
 
-    const [, updateUserError] = await withCatch(
-      client.users.updateUser(userId, {
+    const { firstName, lastName, username, password, image, emailAddress, phoneNumber, role } =
+      parsedSchema.data;
+
+    const client = await clerkClient();
+
+    const [clerkUser, clerkUserError] = await withCatch(
+      client.users.createUser({
         firstName,
         lastName,
+        username: username!,
+        password,
+        // emailAddress: ['doe+clerk_test@example.com'],
+        // phoneNumber: ['+12015550100'],
       }),
     );
 
-    if (updateUserError) {
-      console.error('Clerk Error Details:', updateUserError);
+    if (clerkUserError) {
       return NextResponse.json(
-        { message: `Clerk Update Failed: ${updateUserError.message}` },
+        {
+          success: false,
+          message: `Failed to create new clerk user: ${clerkUserError.message}`,
+          data: null,
+          metadata: null,
+        },
         { status: STATUS_CODE.BAD_REQUEST },
       );
     }
 
     if (image) {
       const [, imageError] = await withCatch(
-        client.users.updateUserProfileImage(userId, { file: image }),
+        client.users.updateUserProfileImage(clerkUser.id, {
+          file: image,
+        }),
       );
+
       if (imageError) {
         return NextResponse.json(
-          { message: `Profile Image Upload Failed: ${imageError.message}` },
+          {
+            success: false,
+            message: `Failed to upload user avatar: ${imageError.message}`,
+            data: null,
+            metadata: null,
+          },
           { status: STATUS_CODE.BAD_REQUEST },
         );
       }
     }
 
-    const [data, error] = await withCatch(
+    const [updatedUser, updatedUserError] = await withCatch<Users[]>(
       database
         .update(userTable)
-        .set({ role: role as Users['role'] })
-        .where(eq(userTable.clerk_id, userId))
-        .returning(),
+        .set({
+          role,
+        })
+        .where(eq(userTable.clerkId, clerkUser.id)),
     );
 
-    if (error) {
+    if (updatedUserError) {
       return NextResponse.json(
-        { message: `Failed to update users: ${error.message}` },
+        {
+          success: false,
+          message: `Failed to create new user: ${updatedUserError.message}`,
+          data: null,
+          metadata: null,
+        },
         { status: STATUS_CODE.BAD_REQUEST },
       );
     }
 
-    return NextResponse.json({ data }, { status: STATUS_CODE.OK });
-  }
-
-  // --- CREATE MODE ---
-  const username =
-    'username' in parsed.data && typeof parsed.data.username === 'string'
-      ? parsed.data.username
-      : undefined;
-  const password =
-    'password' in parsed.data && typeof parsed.data.password === 'string'
-      ? parsed.data.password
-      : undefined;
-
-  if (!username || !password) {
     return NextResponse.json(
-      { message: 'Username and password are required for new users.' },
+      {
+        success: true,
+        message: 'Successfully created user',
+        data: updatedUser[0]!,
+        metadata: null,
+      },
+      { status: STATUS_CODE.CREATED },
+    );
+  } catch (error) {
+    return NextResponse.json(
+      {
+        success: false,
+        message: error instanceof Error ? error.message : 'An unknown error occured',
+        data: null,
+        metadata: null,
+      },
       { status: STATUS_CODE.BAD_REQUEST },
     );
   }
+});
 
-  const [newUser, newUserError] = await withCatch(
-    client.users.createUser({
-      firstName,
-      lastName,
-      username,
-      password,
-    }),
-  );
+export const PUT = withAuth(async (req): Promise<NextResponse<ResponseData<Users | null>>> => {
+  try {
+    const { raw } = parseQueryParams(req);
+    const userId = raw.get('userId') as string;
+    const parsedSchema = await parseRequest(req, EditUserSchema);
 
-  if (newUserError) {
-    console.error('Clerk Error Details:', newUserError);
-    return NextResponse.json(
-      { message: `Clerk Update Failed: ${newUserError.message}` },
-      { status: STATUS_CODE.BAD_REQUEST },
+    if (!parsedSchema.success) {
+      return parsedSchema.response;
+    }
+
+    const { firstName, lastName, phoneNumber, emailAddress, image, role } = parsedSchema.data;
+
+    const client = await clerkClient();
+
+    const [clerkUser, clerkUserError] = await withCatch(
+      client.users.updateUser(userId, {
+        firstName,
+        lastName,
+      }),
     );
-  }
 
-  if (image) {
-    const [, imageError] = await withCatch(
-      client.users.updateUserProfileImage(newUser.id, { file: image }),
-    );
-    if (imageError) {
+    if (clerkUserError) {
       return NextResponse.json(
-        { message: `Profile Image Upload Failed: ${imageError.message}` },
+        {
+          success: false,
+          message: `Failed to update clerk user: ${clerkUserError.message}`,
+          data: null,
+          metadata: null,
+        },
         { status: STATUS_CODE.BAD_REQUEST },
       );
     }
-  }
 
-  const [data, error] = await withCatch(
-    database
-      .update(userTable)
-      .set({ role: role as Users['role'] })
-      .where(eq(userTable.clerk_id, newUser.id))
-      .returning(),
-  );
+    const existingPhoneNumberId = clerkUser.phoneNumbers[0]?.id;
 
-  if (error) {
+    // If the user already has an phone number, create the new one and delete the old one
+    const [, phoneNumberError] = await withCatch(
+      client.phoneNumbers.createPhoneNumber({
+        userId: clerkUser.id,
+        phoneNumber: '+12015550100',
+        primary: true,
+        verified: true,
+      }),
+    );
+
+    if (phoneNumberError) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: `Failed to update email address: ${phoneNumberError.message}`,
+          data: null,
+          metadata: null,
+        },
+        { status: STATUS_CODE.BAD_REQUEST },
+      );
+    }
+
+    // Delete the old email address if it exists and is different
+    if (existingPhoneNumberId && clerkUser.phoneNumbers[0]?.phoneNumber !== phoneNumber) {
+      await client.phoneNumbers.deletePhoneNumber(existingPhoneNumberId);
+    }
+
+    // If the user already has an email, create the new one and delete the old one
+    const [, emailError] = await withCatch(
+      client.emailAddresses.createEmailAddress({
+        userId: clerkUser.id,
+        emailAddress: 'bisenio+clerk_test@example.com',
+        primary: true,
+        verified: true,
+      }),
+    );
+
+    if (emailError) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: `Failed to update email address: ${emailError.message}`,
+          data: null,
+          metadata: null,
+        },
+        { status: STATUS_CODE.BAD_REQUEST },
+      );
+    }
+
+    const existingEmailId = clerkUser.emailAddresses[0]?.id;
+
+    // Delete the old email address if it exists and is different
+    if (existingEmailId && clerkUser.emailAddresses[0]?.emailAddress !== emailAddress) {
+      await client.emailAddresses.deleteEmailAddress(existingEmailId);
+    }
+
+    if (image) {
+      const [, imageError] = await withCatch(
+        client.users.updateUserProfileImage(clerkUser.id, {
+          file: image,
+        }),
+      );
+
+      if (imageError) {
+        return NextResponse.json(
+          {
+            success: false,
+            message: `Failed to upload user avatar: ${imageError.message}`,
+            data: null,
+            metadata: null,
+          },
+          { status: STATUS_CODE.BAD_REQUEST },
+        );
+      }
+    }
+
+    const [updatedUser, updatedUserError] = await withCatch<Users[]>(
+      database
+        .update(userTable)
+        .set({
+          role,
+        })
+        .where(eq(userTable.clerkId, clerkUser.id)),
+    );
+
+    if (updatedUserError) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: `Failed to create new user: ${updatedUserError.message}`,
+          data: null,
+          metadata: null,
+        },
+        { status: STATUS_CODE.BAD_REQUEST },
+      );
+    }
+
     return NextResponse.json(
-      { message: `Failed to insert users: ${error.message}` },
+      {
+        success: true,
+        message: 'Successfully created user',
+        data: updatedUser[0]!,
+        metadata: null,
+      },
+      { status: STATUS_CODE.OK },
+    );
+  } catch (error) {
+    return NextResponse.json(
+      {
+        success: false,
+        message: error instanceof Error ? error.message : 'An unknown error occured',
+        data: null,
+        metadata: null,
+      },
       { status: STATUS_CODE.BAD_REQUEST },
     );
   }
-
-  return NextResponse.json({ data }, { status: STATUS_CODE.CREATED });
 });

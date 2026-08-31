@@ -22,7 +22,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Separator } from '@/components/ui/separator';
 import EditUserForm from '@/features/accounts/components/edit-user-form';
-import useDeleteUserMutation from '@/features/accounts/hooks/use-delete-user-mutation';
+import { useDeleteUserMutation } from '@/hooks/mutations/use-user-mutations';
 import type { Users } from '@/typings';
 import { Edit, MoreHorizontal } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
@@ -58,7 +58,7 @@ export default function ActionCell(props: Users) {
               <DropdownMenuItem
                 onClick={() => {
                   setIsOpenDeleteModal(true);
-                  router.push(`${pathname}?delete=${props.clerk_id}`);
+                  router.push(`${pathname}?delete=${props.clerkId}`);
                 }}>
                 Delete
               </DropdownMenuItem>
@@ -96,7 +96,7 @@ export default function ActionCell(props: Users) {
               <AlertDialogDescription>
                 Are you sure you want to deactivate and remove{' '}
                 <span className="font-bold text-black dark:text-white">
-                  {props.first_name} {props.last_name}
+                  {props.firstName} {props.lastName}
                 </span>{' '}
                 <span className="capitalize">({`Barangay ${props.role}`})</span> from the active
                 system roster?
@@ -107,7 +107,7 @@ export default function ActionCell(props: Users) {
               <AlertDialogAction
                 className="bg-destructive hover:bg-destructive/90"
                 onClick={async () => {
-                  mutateAsync(props.clerk_id);
+                  mutateAsync(props.clerkId);
                   router.back();
                 }}>
                 Yes, I&apos;m sure

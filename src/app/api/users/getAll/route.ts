@@ -8,7 +8,7 @@ import type { ResponseData, Users } from '@/typings';
 import { asc, count, desc, ilike, or, type AnyColumn } from 'drizzle-orm';
 import { NextResponse } from 'next/server';
 
-const ALLOWED_SORT_COLUMNS = new Set(['created_at', 'role']);
+const ALLOWED_SORT_COLUMNS = new Set(['createdAt', 'role']);
 
 export const GET = withAuth(async (req) => {
   const {
@@ -28,9 +28,9 @@ export const GET = withAuth(async (req) => {
   const orderByClauses =
     validSortColumns.length > 0
       ? validSortColumns.map((col) => sortDirection(userTable[col] as AnyColumn))
-      : [desc(userTable.created_at)];
+      : [desc(userTable.createdAt)];
   const searchFilter = search
-    ? or(ilike(userTable.first_name, `%${search}%`), ilike(userTable.last_name, `%${search}%`))
+    ? or(ilike(userTable.firstName, `%${search}%`), ilike(userTable.lastName, `%${search}%`))
     : undefined;
 
   const [queryResult, error] = await withCatch(

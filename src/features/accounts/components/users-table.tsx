@@ -3,7 +3,7 @@
 import DataTable from '@/components/data-table';
 import DebounceInput from '@/components/debounce-input';
 import { columns } from '@/features/accounts/components/users-table-columns';
-import useGetAllUsersQueryOptions from '@/features/user/hooks/use-users-get-all-query';
+import { useGetAllUsersQuery } from '@/hooks/queries/use-users-queries';
 import useTable from '@/hooks/use-table';
 import React from 'react';
 
@@ -12,7 +12,7 @@ export default function UsersTable() {
   const [pageIndex, setPageIndex] = React.useState(0);
   const [pageSize, setPageSize] = React.useState(10);
 
-  const { data, isFetching: isLoading } = useGetAllUsersQueryOptions({
+  const { data, isFetching: isLoading } = useGetAllUsersQuery({
     searchQuery: searchQuery,
     limit: pageSize,
     page: pageIndex + 1,

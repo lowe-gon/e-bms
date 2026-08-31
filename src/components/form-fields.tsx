@@ -163,7 +163,7 @@ export function FormInputFile<TFieldValues extends FieldValues>({
               {...field}
             />
 
-            {imageBase64 ? (
+            {file && imageBase64 ? (
               <div className="flex items-center gap-3.5 rounded-xl border border-slate-200/80 bg-white p-2.5 shadow-2xs dark:border-slate-800 dark:bg-slate-900">
                 <div className="ring-primary/30 dark:ring-primary-400/30 relative size-14 shrink-0 overflow-hidden rounded-2xl shadow-xs ring-2">
                   <Image src={imageBase64} alt="Avatar Preview" className="object-cover" fill />

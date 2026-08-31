@@ -35,6 +35,7 @@ import {
 import { getNavSections } from '@/constants/navigations';
 import useGetUserQuery from '@/features/user/hooks/use-get-user-query';
 import { useIsMobile } from '@/hooks/use-mobile';
+import type { UserRole } from '@/typings';
 import { useClerk } from '@clerk/nextjs';
 import { ChevronsUpDown, LogOut, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
@@ -50,7 +51,7 @@ export default function AppSidebar({ ...props }: React.ComponentProps<typeof Sid
 
   const [showLogoutDialog, setShowLogoutDialog] = React.useState<boolean>(false);
 
-  const navSections = getNavSections(data?.role ?? 'captain');
+  const navSections = getNavSections((data?.role ?? 'captain') as UserRole);
 
   return (
     <>
@@ -144,18 +145,18 @@ export default function AppSidebar({ ...props }: React.ComponentProps<typeof Sid
                         className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
                         <Avatar className="size-8 rounded-lg">
                           <AvatarImage
-                            src={data?.avatar_url ?? ''}
-                            alt={data?.first_name}
+                            src={data?.avatarUrl ?? ''}
+                            alt={data?.firstName}
                             className="rounded-lg"
                           />
                           <AvatarFallback className="rounded-lg">
-                            {data?.first_name.charAt(0)}
-                            {data?.last_name.charAt(0)}
+                            {data?.firstName.charAt(0)}
+                            {data?.lastName.charAt(0)}
                           </AvatarFallback>
                         </Avatar>
                         <div className="grid flex-1 text-left text-sm leading-tight">
                           <span className="truncate font-medium">
-                            {data?.first_name} {data?.last_name}
+                            {data?.firstName} {data?.lastName}
                           </span>
                           <span className="truncate text-xs font-bold capitalize">
                             {data?.role}
@@ -176,18 +177,18 @@ export default function AppSidebar({ ...props }: React.ComponentProps<typeof Sid
                         <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                           <Avatar className="size-8 rounded-lg!">
                             <AvatarImage
-                              src={data?.avatar_url ?? ''}
-                              alt={data?.first_name}
+                              src={data?.avatarUrl ?? ''}
+                              alt={data?.firstName}
                               className="rounded-lg"
                             />
                             <AvatarFallback className="rounded-lg">
-                              {data?.first_name.charAt(0)}
-                              {data?.last_name.charAt(0)}
+                              {data?.firstName.charAt(0)}
+                              {data?.lastName.charAt(0)}
                             </AvatarFallback>
                           </Avatar>
                           <div className="grid flex-1 text-left text-sm leading-tight">
                             <span className="truncate font-medium">
-                              {data?.first_name} {data?.last_name}
+                              {data?.firstName} {data?.lastName}
                             </span>
                             <span className="truncate text-xs font-bold capitalize">
                               {data?.role ?? ''}

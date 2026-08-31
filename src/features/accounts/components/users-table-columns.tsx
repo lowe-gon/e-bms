@@ -48,26 +48,26 @@ const getRoleBadge = (role: UserRole) => {
 };
 
 export const columns = columnHelper.columns([
-  columnHelper.accessor((row) => `${row.first_name} ${row.last_name}`, {
+  columnHelper.accessor((row) => `${row.firstName} ${row.lastName}`, {
     id: 'officialName',
     header: ({ column }) => <DataTableHeaderButton column={column} title="Official Name" />,
     cell: ({ row }) => {
-      const { avatar_url, first_name, last_name } = row.original;
+      const { avatarUrl, firstName, lastName } = row.original;
 
       return (
         <div className="flex items-center gap-3">
           <Avatar className="ring-muted size-11 rounded-xl ring-2">
-            <AvatarImage className="rounded-xl" src={avatar_url} alt={first_name} />
+            <AvatarImage className="rounded-xl" src={avatarUrl} alt={firstName} />
             <AvatarFallback>
-              {first_name.charAt(0)}
-              {last_name.charAt(0)}
+              {firstName.charAt(0)}
+              {lastName.charAt(0)}
             </AvatarFallback>
           </Avatar>
 
           <div className="min-w-0">
             <div className="flex items-center gap-1.5">
               <span className="truncate font-bold">
-                {first_name} {last_name}
+                {firstName} {lastName}
               </span>
             </div>
           </div>
@@ -93,23 +93,24 @@ export const columns = columnHelper.columns([
     cell: ({ row }) => <CredentialsCell {...row.original} />,
   }),
 
-  columnHelper.accessor('phone_number', {
+  columnHelper.accessor((row) => `${row.phoneNumber} ${row.emailAddress}`, {
+    id: 'contacts',
     header: 'Contact',
     cell: ({ row }) => {
-      const { email_address, phone_number } = row.original;
+      const { emailAddress, phoneNumber } = row.original;
 
       return (
         <div className="space-y-1 text-[11px] text-slate-600 dark:text-slate-400">
-          {email_address && (
+          {emailAddress && (
             <div className="flex items-center gap-1.5 truncate">
               <Mail className="h-3 w-3 shrink-0 text-slate-400" />
-              <span className="truncate">{email_address}</span>
+              <span className="truncate">{emailAddress}</span>
             </div>
           )}
-          {phone_number && (
+          {phoneNumber && (
             <div className="flex items-center gap-1.5 truncate">
               <Phone className="h-3 w-3 shrink-0 text-slate-400" />
-              <span>{phone_number}</span>
+              <span>{phoneNumber}</span>
             </div>
           )}
         </div>
@@ -145,18 +146,18 @@ export const columns = columnHelper.columns([
     },
   }),
 
-  columnHelper.accessor('last_sign_in_at', {
+  columnHelper.accessor('status', {
     header: 'Status',
     cell: ({ row }) => {
-      const { last_sign_in_at } = row.original;
+      const { status, lastSignInAt } = row.original;
       return (
         <div className="space-y-0.5">
           <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-            {'Last Active'}
+            {status}
           </span>
           <div className="text-[10px] text-slate-400">
-            {last_sign_in_at ? format(new Date(last_sign_in_at), 'MMM-dd-yyyy') : 'N/A'}
+            {lastSignInAt ? format(new Date(lastSignInAt), 'MMM-dd-yyyy') : 'N/A'}
           </div>
         </div>
       );

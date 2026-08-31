@@ -1,41 +1,40 @@
-import useUpsertUserMutation from '@/features/accounts/hooks/use-upsert-user-mutation';
-import { NewUserSchema, type NewUserSchemaProps } from '@/features/accounts/schema/new-user.schema';
+import {
+  CreateUserSchema,
+  type CreateUserSchemaProps,
+} from '@/features/accounts/schema/user.scheme';
+import { useCreateUserMutation } from '@/hooks/mutations/use-user-mutations';
 import useZodForm from '@/hooks/use-zod-form';
 import React from 'react';
 import { useWatch, type SubmitHandler } from 'react-hook-form';
 import { toast } from 'sonner';
 
 export default function useCreateAccountForm() {
-  const form = useZodForm<NewUserSchemaProps>({
+  const form = useZodForm<CreateUserSchemaProps>({
     defaultValues: {
       firstName: '',
       lastName: '',
       phoneNumber: '',
-      role: '',
-      email: '',
+      role: 'captain',
+      emailAddress: '',
       username: '',
       password: '',
     },
-    schema: NewUserSchema,
+    schema: CreateUserSchema,
   });
 
-  const { mutateAsync } = useUpsertUserMutation();
+  const { mutateAsync } = useCreateUserMutation();
 
-  const onSubmitHandler: SubmitHandler<NewUserSchemaProps> = React.useCallback(
+  const onSubmitHandler: SubmitHandler<CreateUserSchemaProps> = React.useCallback(
     async (data) => {
       try {
-        await mutateAsync({
-          data,
-          mode: 'create',
-        });
+        await mutateAsync(data);
         toast.success('Successfully created account 🎉');
+        form.reset();
       } catch (error) {
         console.error(error);
         toast.error(
           `Failed to create account: ${error instanceof Error ? error.message : 'An unexpected error occurred.'}`,
         );
-      } finally {
-        form.reset();
       }
     },
     [mutateAsync, form],

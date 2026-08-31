@@ -99,7 +99,7 @@ export default function EditUserForm(user: Users) {
 
           <FormInputWithFloatingLabel
             type="email"
-            name="email"
+            name="emailAddress"
             control={form.control}
             label="Email"
             placeholder="juandelacruz@example.com"

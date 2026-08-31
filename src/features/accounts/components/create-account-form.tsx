@@ -48,13 +48,13 @@ export const getPermissionsList = (role: UserRole) => {
         'Session Attendance',
         'Project Progress Tracking',
       ];
-    // case 'tanod':
-    //   return [
-    //     'Blotter Incident Encoding',
-    //     'Peace & Order Patrol Logs',
-    //     'Community Watch Updates',
-    //     'Lupon Hearing Assistance',
-    //   ];
+    case 'tanod':
+      return [
+        'Blotter Incident Encoding',
+        'Peace & Order Patrol Logs',
+        'Community Watch Updates',
+        'Lupon Hearing Assistance',
+      ];
     default:
       return ['Front Desk Clearances', 'Resident Verification', 'Announcement Posting'];
   }
@@ -99,7 +99,7 @@ export default function CreateAccountForm() {
 
           <FormInputWithFloatingLabel
             type="email"
-            name="email"
+            name="emailAddress"
             control={form.control}
             label="Email"
             placeholder="juandelacruz@example.com"
@@ -133,6 +133,14 @@ export default function CreateAccountForm() {
               {
                 label: 'Barangay Treasurer',
                 value: 'treasurer',
+              },
+              {
+                label: 'Barangay Tanod',
+                value: 'tanod',
+              },
+              {
+                label: 'Barangay Staff',
+                value: 'staff',
               },
             ]}
             label="System Role Tier"

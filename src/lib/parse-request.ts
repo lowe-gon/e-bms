@@ -1,10 +1,11 @@
 import { STATUS_CODE } from '@/constants/http-status-code';
+import type { ResponseData } from '@/typings';
 import { type NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 
 export type ParseRequestResult<TSchema extends z.ZodType> =
   | { success: true; data: z.output<TSchema> }
-  | { success: false; response: NextResponse<{ message: string }> };
+  | { success: false; response: NextResponse<ResponseData<null>> };
 
 /**
  * Validates request JSON against a Zod schema.
@@ -38,7 +39,10 @@ export async function parseRequest<TSchema extends z.ZodType>(
         success: false,
         response: NextResponse.json(
           {
+            success: false,
             message: result.error.issues.map((issue) => issue.message).join(', '),
+            data: null,
+            metadata: null,
           },
           {
             status: STATUS_CODE.BAD_REQUEST,
@@ -55,8 +59,8 @@ export async function parseRequest<TSchema extends z.ZodType>(
     return {
       success: false,
       response: NextResponse.json(
-        { message: 'Invalid JSON payload' },
-        { status: STATUS_CODE.BAD_REQUEST },
+        { success: false, message: 'Invalid JSON payload', data: null, metadata: null },
+        { status: STATUS_CODE.SERVER_ERROR },
       ),
     };
   }

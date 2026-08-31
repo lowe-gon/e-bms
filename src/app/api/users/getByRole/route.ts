@@ -18,7 +18,7 @@ export const GET = withAuth(async (req): Promise<NextResponse<ResponseData<Users
         .select()
         .from(userTable)
         .where(eq(userTable.role, role as Users['role']))
-        .orderBy(asc(userTable.created_at)),
+        .orderBy(asc(userTable.createdAt)),
     );
 
     if (error) {

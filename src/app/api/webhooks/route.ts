@@ -17,22 +17,22 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       case 'user.created':
       case 'user.updated': {
         const newUser = {
-          clerk_id: id ?? '',
-          first_name: evt.data.first_name ?? '',
-          last_name: evt.data.last_name ?? '',
-          avatar_url: evt.data.image_url ?? '',
-          phone_number: evt.data.phone_numbers?.[0]?.phone_number ?? '',
+          clerkId: id ?? '',
+          firstName: evt.data.first_name ?? '',
+          lastName: evt.data.last_name ?? '',
+          avatarUrl: evt.data.image_url ?? '',
+          phoneNumber: evt.data.phone_numbers?.[0]?.phone_number ?? '',
           username: evt.data.username ?? null,
-          email_address: evt.data.email_addresses?.[0]?.email_address ?? null,
-          last_sign_in_at: evt.data.last_sign_in_at
+          emailAddress: evt.data.email_addresses?.[0]?.email_address ?? null,
+          lastSignInAt: evt.data.last_sign_in_at
             ? new Date(evt.data.last_sign_in_at).toISOString()
             : null,
-          updated_at: new Date(evt.data.updated_at).toISOString(),
+          updatedAt: new Date(evt.data.updated_at).toISOString(),
         } as Users;
 
         const [, error] = await withCatch(
           database.insert(userTable).values(newUser).onConflictDoUpdate({
-            target: userTable.clerk_id,
+            target: userTable.clerkId,
             set: newUser,
           }),
         );
@@ -47,7 +47,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       case 'user.deleted': {
         if (id) {
           const [, error] = await withCatch(
-            database.delete(userTable).where(eq(userTable.clerk_id, id)),
+            database.delete(userTable).where(eq(userTable.clerkId, id)),
           );
 
           if (error) {

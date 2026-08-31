@@ -1,7 +1,7 @@
 'use client';
 
-import useGetUserByRoleQuery from '@/hooks/queries/use-get-user-by-role-query';
-import { useGetAllSectorsQuery } from '@/hooks/queries/use-sectors-query';
+import { useGetAllSectorsQuery } from '@/hooks/queries/use-sectors-queries';
+import useGetUserByRoleQuery from '@/hooks/queries/use-users-queries';
 import type { Users } from '@/typings';
 import React, { createContext, useContext } from 'react';
 

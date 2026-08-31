@@ -1,6 +1,6 @@
-import type { Database } from '@/typings/database.types';
+import type { userTable } from '@/database/schema';
 
-export type UserRole = 'captain' | 'secretary' | 'treasurer' | 'councilor';
+export type UserRole = 'captain' | 'secretary' | 'treasurer' | 'councilor' | 'staff' | 'tanod';
 
 export type ResponseMetadata = {
   limit: number;
@@ -19,12 +19,4 @@ export type ResponseData<TData> = {
   message: string;
 };
 
-export type Users = Database['public']['Tables']['users']['Row'];
-export type Sectors = Database['public']['Tables']['sectors']['Row'];
-export type Puroks = Database['public']['Tables']['puroks']['Row'];
-
-export type UserWithSectorAndPurok = Users & {
-  sector: Sectors & {
-    puroks: Puroks[];
-  };
-};
+export type Users = typeof userTable.$inferSelect;
