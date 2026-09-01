@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils';
+import AppProvider from '@/providers';
 import type { Metadata } from 'next';
 import { DM_Sans, Geist, Geist_Mono, Montserrat } from 'next/font/google';
 import './globals.css';
@@ -35,7 +36,11 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
         dmSans.variable,
         montserratHeading.variable,
       )}>
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="flex w-screen max-w-screen flex-col overflow-x-hidden">
+        <AppProvider>
+          <main className="h-dvh min-h-dvh">{children}</main>
+        </AppProvider>
+      </body>
     </html>
   );
 }
