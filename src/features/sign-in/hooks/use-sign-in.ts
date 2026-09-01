@@ -1,7 +1,7 @@
 import {
   type TSignInFormSchema,
   ZSignInFormSchema,
-} from '@/features/sign-in/schema/sign-in-form.schema';
+} from '@/features/sign-in/schemas/sign-in-form.schema';
 import useZodForm from '@/hooks/use-zod-form';
 import { useSignIn as useClerkSignIn } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';

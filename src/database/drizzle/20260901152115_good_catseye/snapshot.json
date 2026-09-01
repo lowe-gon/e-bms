@@ -1,0 +1,3163 @@
+{
+  "version": "8",
+  "dialect": "postgres",
+  "id": "2329616c-3717-4d28-b505-358d30cb4ec5",
+  "prevIds": [
+    "00000000-0000-0000-0000-000000000000"
+  ],
+  "ddl": [
+    {
+      "values": [
+        "Active",
+        "InActive",
+        "On Leave"
+      ],
+      "name": "account_status",
+      "entityType": "enums",
+      "schema": "public"
+    },
+    {
+      "values": [
+        "Public Advisory",
+        "Emergency / Weather Alert",
+        "Executive Order",
+        "Medical Mission",
+        "SK Youth Event"
+      ],
+      "name": "announcement_category",
+      "entityType": "enums",
+      "schema": "public"
+    },
+    {
+      "values": [
+        "Pending Lupon Hearing",
+        "Amicably Settled",
+        "Cert. to File Action Issued",
+        "Dismissed"
+      ],
+      "name": "blotter_status",
+      "entityType": "enums",
+      "schema": "public"
+    },
+    {
+      "values": [
+        "Single",
+        "Married",
+        "Widowed",
+        "Separated"
+      ],
+      "name": "civil_status",
+      "entityType": "enums",
+      "schema": "public"
+    },
+    {
+      "values": [
+        "Member",
+        "Vice Chairperson",
+        "Committee Secretary"
+      ],
+      "name": "committee_role",
+      "entityType": "enums",
+      "schema": "public"
+    },
+    {
+      "values": [
+        "Pending Review",
+        "Approved",
+        "Released / Printed",
+        "Rejected"
+      ],
+      "name": "document_status",
+      "entityType": "enums",
+      "schema": "public"
+    },
+    {
+      "values": [
+        "Barangay Clearance",
+        "Certificate of Indigency",
+        "Certificate of Residency",
+        "First Time Job Seeker Clearance (RA 11261)",
+        "Barangay Business Clearance",
+        "Barangay Blotter Certificate"
+      ],
+      "name": "document_type",
+      "entityType": "enums",
+      "schema": "public"
+    },
+    {
+      "values": [
+        "Elementary",
+        "High School",
+        "College",
+        "Vocational",
+        "Post-Graduate"
+      ],
+      "name": "education",
+      "entityType": "enums",
+      "schema": "public"
+    },
+    {
+      "values": [
+        "Male",
+        "Female"
+      ],
+      "name": "gender",
+      "entityType": "enums",
+      "schema": "public"
+    },
+    {
+      "values": [
+        "Pending Captain Approval",
+        "Scheduled",
+        "In Progress",
+        "Adjourned",
+        "Cancelled"
+      ],
+      "name": "meeting_status",
+      "entityType": "enums",
+      "schema": "public"
+    },
+    {
+      "values": [
+        "Regular Session",
+        "Special Session",
+        "Barangay Assembly",
+        "Committee Hearing"
+      ],
+      "name": "meeting_type",
+      "entityType": "enums",
+      "schema": "public"
+    },
+    {
+      "values": [
+        "Cash",
+        "GCash / Electronic",
+        "Bank Transfer"
+      ],
+      "name": "payment_method",
+      "entityType": "enums",
+      "schema": "public"
+    },
+    {
+      "values": [
+        "Paid",
+        "Pending Payment",
+        "Waived (Exempt)"
+      ],
+      "name": "payment_status",
+      "entityType": "enums",
+      "schema": "public"
+    },
+    {
+      "values": [
+        "Planning",
+        "Ongoing",
+        "Completed",
+        "On Hold"
+      ],
+      "name": "project_status",
+      "entityType": "enums",
+      "schema": "public"
+    },
+    {
+      "values": [
+        "captain",
+        "secretary",
+        "councilor",
+        "treasurer",
+        "staff",
+        "tanod"
+      ],
+      "name": "user_role",
+      "entityType": "enums",
+      "schema": "public"
+    },
+    {
+      "values": [
+        "Registered Voter",
+        "Non-Voter"
+      ],
+      "name": "voter_status",
+      "entityType": "enums",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": true,
+      "name": "announcements",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": true,
+      "name": "budget_items",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": true,
+      "name": "committee_members",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": true,
+      "name": "committee_projects",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": true,
+      "name": "committees",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": true,
+      "name": "disbursement_vouchers",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": true,
+      "name": "document_requests",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": true,
+      "name": "households",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": true,
+      "name": "official_receipts",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": true,
+      "name": "residents",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": true,
+      "name": "sectors",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": true,
+      "name": "users",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "announcements"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "title",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "announcements"
+    },
+    {
+      "type": "announcement_category",
+      "typeSchema": "public",
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "category",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "announcements"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "content",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "announcements"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "date_posted",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "announcements"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "posted_by_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "announcements"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "'All Residents'",
+      "generated": null,
+      "identity": null,
+      "name": "target_audience",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "announcements"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "created_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "announcements"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "updated_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "announcements"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "budget_items"
+    },
+    {
+      "type": "timestamp",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "year",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "budget_items"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "name",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "budget_items"
+    },
+    {
+      "type": "numeric(14,2)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "allocated_amount",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "budget_items"
+    },
+    {
+      "type": "numeric(14,2)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "'0.00'",
+      "generated": null,
+      "identity": null,
+      "name": "spent_amount",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "budget_items"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "source",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "budget_items"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "created_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "budget_items"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "updated_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "budget_items"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "committee_members"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "committee_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "committee_members"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "name",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "committee_members"
+    },
+    {
+      "type": "committee_role",
+      "typeSchema": "public",
+      "notNull": true,
+      "dimensions": 0,
+      "default": "'Member'",
+      "generated": null,
+      "identity": null,
+      "name": "role",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "committee_members"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "created_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "committee_members"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "updated_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "committee_members"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "committee_projects"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "committee_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "committee_projects"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "name",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "committee_projects"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "description",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "committee_projects"
+    },
+    {
+      "type": "numeric(12,2)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "'0.00'",
+      "generated": null,
+      "identity": null,
+      "name": "budget_allocated",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "committee_projects"
+    },
+    {
+      "type": "numeric(12,2)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "'0.00'",
+      "generated": null,
+      "identity": null,
+      "name": "budget_spent",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "committee_projects"
+    },
+    {
+      "type": "project_status",
+      "typeSchema": "public",
+      "notNull": true,
+      "dimensions": 0,
+      "default": "'Planning'",
+      "generated": null,
+      "identity": null,
+      "name": "status",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "committee_projects"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "target_beneficiaries",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "committee_projects"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "metric_label",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "committee_projects"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": "0",
+      "generated": null,
+      "identity": null,
+      "name": "metric_target",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "committee_projects"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": "0",
+      "generated": null,
+      "identity": null,
+      "name": "metric_current",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "committee_projects"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "start_date",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "committee_projects"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "end_date",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "committee_projects"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "created_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "committee_projects"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "updated_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "committee_projects"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "committees"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "assigned_councilor_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "committees"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "name",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "committees"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "mandated_fund_name",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "committees"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "demographic_focus",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "committees"
+    },
+    {
+      "type": "numeric(12,2)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "'0.00'",
+      "generated": null,
+      "identity": null,
+      "name": "allocated_budget",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "committees"
+    },
+    {
+      "type": "jsonb",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": "'[]'",
+      "generated": null,
+      "identity": null,
+      "name": "sample_aid_services",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "committees"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "created_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "committees"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "updated_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "committees"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "disbursement_vouchers"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "voucher_no",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "disbursement_vouchers"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "or_no",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "disbursement_vouchers"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "prepared_by_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "disbursement_vouchers"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "approved_by_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "disbursement_vouchers"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "date",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "disbursement_vouchers"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "payee",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "disbursement_vouchers"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "explation",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "disbursement_vouchers"
+    },
+    {
+      "type": "numeric(14,2)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "amount",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "disbursement_vouchers"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "fund_source",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "disbursement_vouchers"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "created_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "disbursement_vouchers"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "updated_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "disbursement_vouchers"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "document_requests"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "control_no",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "document_requests"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "or_no",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "document_requests"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "resident_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "document_requests"
+    },
+    {
+      "type": "document_type",
+      "typeSchema": "public",
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "document_type",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "document_requests"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "purpose",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "document_requests"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "request_date",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "document_requests"
+    },
+    {
+      "type": "document_status",
+      "typeSchema": "public",
+      "notNull": true,
+      "dimensions": 0,
+      "default": "'Pending Review'",
+      "generated": null,
+      "identity": null,
+      "name": "status",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "document_requests"
+    },
+    {
+      "type": "numeric(10,2)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "'0.00'",
+      "generated": null,
+      "identity": null,
+      "name": "fee",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "document_requests"
+    },
+    {
+      "type": "boolean",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "false",
+      "generated": null,
+      "identity": null,
+      "name": "is_fee_exempt",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "document_requests"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "issued_date",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "document_requests"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "approved_by_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "document_requests"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "remarks",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "document_requests"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "created_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "document_requests"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "updated_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "document_requests"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "households"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "household_number",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "households"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "sector_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "households"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "purok",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "households"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "created_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "households"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "updated_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "households"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "official_receipts"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "or_no",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "official_receipts"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "payor_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "official_receipts"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "issued_by_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "official_receipts"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "date",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "official_receipts"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "nature_of_collection",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "official_receipts"
+    },
+    {
+      "type": "numeric(14,2)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "amount",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "official_receipts"
+    },
+    {
+      "type": "payment_method",
+      "typeSchema": "public",
+      "notNull": true,
+      "dimensions": 0,
+      "default": "'Cash'",
+      "generated": null,
+      "identity": null,
+      "name": "payment_method",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "official_receipts"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "created_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "official_receipts"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "updated_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "official_receipts"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "residents"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "household_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "residents"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "first_name",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "residents"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "middle_name",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "residents"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "last_name",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "residents"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "''",
+      "generated": null,
+      "identity": null,
+      "name": "suffix",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "residents"
+    },
+    {
+      "type": "gender",
+      "typeSchema": "public",
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "gender",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "residents"
+    },
+    {
+      "type": "timestamp",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "birth_date",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "residents"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "'Member'",
+      "generated": null,
+      "identity": null,
+      "name": "household_role",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "residents"
+    },
+    {
+      "type": "boolean",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "false",
+      "generated": null,
+      "identity": null,
+      "name": "is_household_head",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "residents"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "contact_number",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "residents"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "occupation",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "residents"
+    },
+    {
+      "type": "voter_status",
+      "typeSchema": "public",
+      "notNull": true,
+      "dimensions": 0,
+      "default": "'Non-Voter'",
+      "generated": null,
+      "identity": null,
+      "name": "voter_status",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "residents"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "precinct_number",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "residents"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "national_text",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "residents"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "philhealth_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "residents"
+    },
+    {
+      "type": "boolean",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "false",
+      "generated": null,
+      "identity": null,
+      "name": "is_senior",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "residents"
+    },
+    {
+      "type": "boolean",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "false",
+      "generated": null,
+      "identity": null,
+      "name": "is_pwd",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "residents"
+    },
+    {
+      "type": "boolean",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "false",
+      "generated": null,
+      "identity": null,
+      "name": "is_solo_parent",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "residents"
+    },
+    {
+      "type": "boolean",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "false",
+      "generated": null,
+      "identity": null,
+      "name": "is_4ps",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "residents"
+    },
+    {
+      "type": "boolean",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "false",
+      "generated": null,
+      "identity": null,
+      "name": "is_youth",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "residents"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "avatar_url",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "residents"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "created_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "residents"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "updated_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "residents"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "sectors"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "code",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "sectors"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "assigned_councilor_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "sectors"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "''",
+      "generated": null,
+      "identity": null,
+      "name": "name",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "sectors"
+    },
+    {
+      "type": "jsonb",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "purok_coverage",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "sectors"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "created_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "sectors"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "updated_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "sectors"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "users"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "clerk_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "users"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "''",
+      "generated": null,
+      "identity": null,
+      "name": "avatar_url",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "users"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "''",
+      "generated": null,
+      "identity": null,
+      "name": "first_name",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "users"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "''",
+      "generated": null,
+      "identity": null,
+      "name": "last_name",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "users"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "email_address",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "users"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "username",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "users"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "''",
+      "generated": null,
+      "identity": null,
+      "name": "phone_number",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "users"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "last_sign_in_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "users"
+    },
+    {
+      "type": "user_role",
+      "typeSchema": "public",
+      "notNull": true,
+      "dimensions": 0,
+      "default": "'captain'",
+      "generated": null,
+      "identity": null,
+      "name": "role",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "users"
+    },
+    {
+      "type": "account_status",
+      "typeSchema": "public",
+      "notNull": false,
+      "dimensions": 0,
+      "default": "'Active'",
+      "generated": null,
+      "identity": null,
+      "name": "status",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "users"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "created_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "users"
+    },
+    {
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "updated_at",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "users"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "posted_by_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "users",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "announcements_posted_by_id_users_id_fkey",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "announcements"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "committee_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "committees",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "committee_members_committee_id_committees_id_fkey",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "committee_members"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "committee_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "committees",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "committee_projects_committee_id_committees_id_fkey",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "committee_projects"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "assigned_councilor_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "users",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "committees_assigned_councilor_id_users_id_fkey",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "committees"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "prepared_by_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "users",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "disbursement_vouchers_prepared_by_id_users_id_fkey",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "disbursement_vouchers"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "approved_by_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "users",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "disbursement_vouchers_approved_by_id_users_id_fkey",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "disbursement_vouchers"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "resident_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "residents",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "document_requests_resident_id_residents_id_fkey",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "document_requests"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "approved_by_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "users",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "document_requests_approved_by_id_users_id_fkey",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "document_requests"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "sector_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "sectors",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "households_sector_id_sectors_id_fkey",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "households"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "payor_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "residents",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "official_receipts_payor_id_residents_id_fkey",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "official_receipts"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "issued_by_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "users",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "official_receipts_issued_by_id_users_id_fkey",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "official_receipts"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "household_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "households",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "residents_household_id_households_id_fkey",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "residents"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "assigned_councilor_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "users",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "sectors_assigned_councilor_id_users_id_fkey",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "sectors"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "announcements_pkey",
+      "schema": "public",
+      "table": "announcements",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "budget_items_pkey",
+      "schema": "public",
+      "table": "budget_items",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "committee_members_pkey",
+      "schema": "public",
+      "table": "committee_members",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "committee_projects_pkey",
+      "schema": "public",
+      "table": "committee_projects",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "committees_pkey",
+      "schema": "public",
+      "table": "committees",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "disbursement_vouchers_pkey",
+      "schema": "public",
+      "table": "disbursement_vouchers",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "document_requests_pkey",
+      "schema": "public",
+      "table": "document_requests",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "households_pkey",
+      "schema": "public",
+      "table": "households",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "official_receipts_pkey",
+      "schema": "public",
+      "table": "official_receipts",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "residents_pkey",
+      "schema": "public",
+      "table": "residents",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "sectors_pkey",
+      "schema": "public",
+      "table": "sectors",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "users_pkey",
+      "schema": "public",
+      "table": "users",
+      "entityType": "pks"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "id"
+      ],
+      "nullsNotDistinct": false,
+      "name": "announcements_id_key",
+      "schema": "public",
+      "table": "announcements",
+      "entityType": "uniques"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "id"
+      ],
+      "nullsNotDistinct": false,
+      "name": "budget_items_id_key",
+      "schema": "public",
+      "table": "budget_items",
+      "entityType": "uniques"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "id"
+      ],
+      "nullsNotDistinct": false,
+      "name": "committee_members_id_key",
+      "schema": "public",
+      "table": "committee_members",
+      "entityType": "uniques"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "id"
+      ],
+      "nullsNotDistinct": false,
+      "name": "committee_projects_id_key",
+      "schema": "public",
+      "table": "committee_projects",
+      "entityType": "uniques"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "id"
+      ],
+      "nullsNotDistinct": false,
+      "name": "committees_id_key",
+      "schema": "public",
+      "table": "committees",
+      "entityType": "uniques"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "id"
+      ],
+      "nullsNotDistinct": false,
+      "name": "disbursement_vouchers_id_key",
+      "schema": "public",
+      "table": "disbursement_vouchers",
+      "entityType": "uniques"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "voucher_no"
+      ],
+      "nullsNotDistinct": false,
+      "name": "disbursement_vouchers_voucher_no_key",
+      "schema": "public",
+      "table": "disbursement_vouchers",
+      "entityType": "uniques"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "id"
+      ],
+      "nullsNotDistinct": false,
+      "name": "document_requests_id_key",
+      "schema": "public",
+      "table": "document_requests",
+      "entityType": "uniques"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "control_no"
+      ],
+      "nullsNotDistinct": false,
+      "name": "document_requests_control_no_key",
+      "schema": "public",
+      "table": "document_requests",
+      "entityType": "uniques"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "id"
+      ],
+      "nullsNotDistinct": false,
+      "name": "households_id_key",
+      "schema": "public",
+      "table": "households",
+      "entityType": "uniques"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "household_number"
+      ],
+      "nullsNotDistinct": false,
+      "name": "households_household_number_key",
+      "schema": "public",
+      "table": "households",
+      "entityType": "uniques"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "id"
+      ],
+      "nullsNotDistinct": false,
+      "name": "official_receipts_id_key",
+      "schema": "public",
+      "table": "official_receipts",
+      "entityType": "uniques"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "or_no"
+      ],
+      "nullsNotDistinct": false,
+      "name": "official_receipts_or_no_key",
+      "schema": "public",
+      "table": "official_receipts",
+      "entityType": "uniques"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "id"
+      ],
+      "nullsNotDistinct": false,
+      "name": "residents_id_key",
+      "schema": "public",
+      "table": "residents",
+      "entityType": "uniques"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "name"
+      ],
+      "nullsNotDistinct": false,
+      "name": "sectors_name_key",
+      "schema": "public",
+      "table": "sectors",
+      "entityType": "uniques"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "clerk_id"
+      ],
+      "nullsNotDistinct": false,
+      "name": "users_clerk_id_key",
+      "schema": "public",
+      "table": "users",
+      "entityType": "uniques"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "email_address"
+      ],
+      "nullsNotDistinct": false,
+      "name": "users_email_address_key",
+      "schema": "public",
+      "table": "users",
+      "entityType": "uniques"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "username"
+      ],
+      "nullsNotDistinct": false,
+      "name": "users_username_key",
+      "schema": "public",
+      "table": "users",
+      "entityType": "uniques"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "INSERT",
+      "roles": [
+        "authenticated"
+      ],
+      "using": null,
+      "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "name": "Announcement Insert Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "announcements"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "SELECT",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": null,
+      "name": "Announcement Select Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "announcements"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "UPDATE",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "name": "Announcement Update Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "announcements"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "DELETE",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": null,
+      "name": "Announcement Delete Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "announcements"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "INSERT",
+      "roles": [
+        "authenticated"
+      ],
+      "using": null,
+      "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "name": "Budget Item Insert Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "budget_items"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "SELECT",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": null,
+      "name": "Budget Item Select Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "budget_items"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "UPDATE",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "name": "Budget Item Update Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "budget_items"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "DELETE",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": null,
+      "name": "Budget Item Delete Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "budget_items"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "INSERT",
+      "roles": [
+        "authenticated"
+      ],
+      "using": null,
+      "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "name": "Committee Member Insert Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "committee_members"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "SELECT",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": null,
+      "name": "Committee Member Select Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "committee_members"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "UPDATE",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "name": "Committee Member Update Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "committee_members"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "DELETE",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": null,
+      "name": "Committee Member Delete Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "committee_members"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "INSERT",
+      "roles": [
+        "authenticated"
+      ],
+      "using": null,
+      "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "name": "Committee Project Insert Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "committee_projects"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "SELECT",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": null,
+      "name": "Committee Project Select Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "committee_projects"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "UPDATE",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "name": "Committee Project Update Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "committee_projects"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "DELETE",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": null,
+      "name": "Committee Project Delete Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "committee_projects"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "INSERT",
+      "roles": [
+        "authenticated"
+      ],
+      "using": null,
+      "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "name": "Committee Insert Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "committees"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "SELECT",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": null,
+      "name": "Committee Select Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "committees"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "UPDATE",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "name": "Committee Update Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "committees"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "DELETE",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": null,
+      "name": "Committee Delete Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "committees"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "INSERT",
+      "roles": [
+        "authenticated"
+      ],
+      "using": null,
+      "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "name": "Budget Item Insert Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "disbursement_vouchers"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "SELECT",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": null,
+      "name": "Budget Item Select Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "disbursement_vouchers"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "UPDATE",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "name": "Budget Item Update Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "disbursement_vouchers"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "DELETE",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": null,
+      "name": "Budget Item Delete Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "disbursement_vouchers"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "INSERT",
+      "roles": [
+        "authenticated"
+      ],
+      "using": null,
+      "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "name": "Document Request Insert Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "document_requests"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "SELECT",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": null,
+      "name": "Document Request Select Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "document_requests"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "UPDATE",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "name": "Document Request Update Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "document_requests"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "DELETE",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": null,
+      "name": "Document Request Delete Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "document_requests"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "INSERT",
+      "roles": [
+        "authenticated"
+      ],
+      "using": null,
+      "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "name": "Households Insert Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "households"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "SELECT",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": null,
+      "name": "Households Select Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "households"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "UPDATE",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "name": "Households Update Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "households"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "DELETE",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": null,
+      "name": "Households Delete Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "households"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "INSERT",
+      "roles": [
+        "authenticated"
+      ],
+      "using": null,
+      "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "name": "Official Receipt Insert Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "official_receipts"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "SELECT",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": null,
+      "name": "Official Receipt Select Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "official_receipts"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "UPDATE",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "name": "Official Receipt Update Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "official_receipts"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "DELETE",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": null,
+      "name": "Official Receipt Delete Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "official_receipts"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "INSERT",
+      "roles": [
+        "authenticated"
+      ],
+      "using": null,
+      "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "name": "Resident Insert Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "residents"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "SELECT",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": null,
+      "name": "Resident Select Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "residents"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "UPDATE",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "name": "Resident Update Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "residents"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "DELETE",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": null,
+      "name": "Resident Delete Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "residents"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "INSERT",
+      "roles": [
+        "authenticated"
+      ],
+      "using": null,
+      "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "name": "Sector Insert Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "sectors"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "SELECT",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": null,
+      "name": "Sector Select Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "sectors"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "UPDATE",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "name": "Sector Update Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "sectors"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "DELETE",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
+      "withCheck": null,
+      "name": "Sector Delete Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "sectors"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "INSERT",
+      "roles": [
+        "service_role"
+      ],
+      "using": null,
+      "withCheck": "true",
+      "name": "User Insert Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "users"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "SELECT",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "(select auth.jwt() ->> 'sub') = (clerk_id)::text",
+      "withCheck": null,
+      "name": "User Select Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "users"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "UPDATE",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "(select auth.jwt() ->> 'sub') = (clerk_id)::text",
+      "withCheck": "(select auth.jwt() ->> 'sub') = (clerk_id)::text",
+      "name": "User Update Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "users"
+    },
+    {
+      "as": "PERMISSIVE",
+      "for": "DELETE",
+      "roles": [
+        "authenticated"
+      ],
+      "using": "(select auth.jwt() ->> 'sub') = (clerk_id)::text",
+      "withCheck": null,
+      "name": "User Delete Policy",
+      "entityType": "policies",
+      "schema": "public",
+      "table": "users"
+    }
+  ],
+  "renames": []
+}
