@@ -7,8 +7,6 @@ export const EnvSchema = z.object({
   CLERK_SECRET_KEY: z.string(),
   CLERK_WEBHOOK_SIGNING_SECRET: z.string(),
   NEXT_PUBLIC_CLERK_SIGN_IN_URL: z.string(),
-  NEXT_PUBLIC_SUPABASE_URL: z.string(),
-  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: z.string(),
   DATABASE_URL: z.string(),
 });
 
