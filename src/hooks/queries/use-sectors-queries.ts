@@ -1,8 +1,9 @@
 import { catchFetch } from '@/lib/try-catch';
+import { type ResponseData, type UsersWithSectors } from '@/typings';
 import { useQuery } from '@tanstack/react-query';
 
 async function getAllSectorsApi() {
-  const [data, error] = await catchFetch('/api/sectors/getAll', {
+  const [data, error] = await catchFetch<ResponseData<UsersWithSectors[]>>('/api/sectors/getAll', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

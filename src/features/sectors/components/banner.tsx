@@ -4,8 +4,8 @@ import Modal from '@/components/modal';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useSector } from '@/context/sectors.context';
 import CreateSectorForm from '@/features/sectors/components/create-sector-form';
+import { useSector } from '@/features/sectors/context/sectors.context';
 import { Compass, MapPin, Plus } from 'lucide-react';
 import React from 'react';
 
@@ -15,10 +15,10 @@ export default function SectorBanner() {
   const { councils, sector, isLoading } = useSector();
 
   const officialOptions =
-    councils.map(({ first_name, last_name, avatar_url, id }) => ({
-      label: `${first_name} ${last_name}`,
+    councils.map(({ firstName, lastName, avatarUrl, id }) => ({
+      label: `${firstName} ${lastName}`,
       value: id,
-      image: avatar_url ?? '',
+      image: avatarUrl ?? '',
     })) ?? [];
 
   return (

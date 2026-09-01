@@ -1,4 +1,4 @@
-import type { userTable } from '@/database/schema';
+import type { sectorTable, userTable } from '@/database/schema';
 
 export type UserRole = 'captain' | 'secretary' | 'treasurer' | 'councilor' | 'staff' | 'tanod';
 
@@ -20,3 +20,8 @@ export type ResponseData<TData> = {
 };
 
 export type Users = typeof userTable.$inferSelect;
+export type Sectors = typeof sectorTable.$inferSelect;
+
+export type UsersWithSectors = Users & {
+  sectors: Sectors | null;
+};

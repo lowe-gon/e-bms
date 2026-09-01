@@ -20,7 +20,7 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useSector } from '@/context/sectors.context';
+import { useSector } from '@/features/sectors/context/sectors.context';
 import { useSectorDeleteByIdMutation } from '@/hooks/mutations/use-sector-mutations';
 import { cn } from '@/lib/utils';
 import { Award, Compass, Trash2 } from 'lucide-react';
@@ -97,7 +97,14 @@ export default function SectorDetails() {
                             'ring-primary/50 to-primary bg-linear-to-br from-blue-700 text-white! ring-2',
                         )}>
                         <CardContent className="pointer-events-none">
-                          <h3 className="text-sm font-bold">{name}</h3>
+                          <span
+                            className={cn(
+                              'bg-muted rounded-sm px-2 py-0.5 text-[10px] font-extrabold uppercase',
+                              isSelected && 'bg-accent/20',
+                            )}>
+                            {code}
+                          </span>
+                          <h3 className="mt-2 text-sm font-bold">{name}</h3>
                           <p className="mt-1 line-clamp-1 text-[10px]">
                             Coverage: {purokCoverage.join(', ')}
                           </p>
@@ -117,7 +124,7 @@ export default function SectorDetails() {
       {/* Selected Geographic Sector Dashboard Details */}
       {isLoading ? (
         <Skeleton className="h-52 rounded-xl" />
-      ) : (
+      ) : sector.length ? (
         <Card>
           <CardContent className="space-y-6">
             <div className="flex items-center justify-between">
@@ -189,6 +196,25 @@ export default function SectorDetails() {
                 </CardContent>
               </Card>
             </div>
+          </CardContent>
+        </Card>
+      ) : (
+        <Card>
+          <CardContent className="flex flex-col items-center justify-center space-y-3 py-12">
+            <Compass className="mx-auto h-12 w-12 text-slate-400" />
+            <h3 className="text-base font-bold text-slate-700 dark:text-slate-200">
+              No Geographic Sectors Found
+            </h3>
+            <p className="mx-auto max-w-md text-center text-xs text-slate-500">
+              Get started by registering your first Barangay Geographic Sector to map purok
+              boundaries, zone leaders, and assigned council members.
+            </p>
+            <Button
+              // onClick={handleOpenCreateModal}
+              size="lg"
+              className="px-6 font-bold">
+              Register First Sector
+            </Button>
           </CardContent>
         </Card>
       )}

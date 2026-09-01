@@ -2,16 +2,10 @@
   "version": "8",
   "dialect": "postgres",
   "id": "53d63056-f01a-4744-a716-237c7965949a",
-  "prevIds": [
-    "00000000-0000-0000-0000-000000000000"
-  ],
+  "prevIds": ["00000000-0000-0000-0000-000000000000"],
   "ddl": [
     {
-      "values": [
-        "Active",
-        "InActive",
-        "On Leave"
-      ],
+      "values": ["Active", "InActive", "On Leave"],
       "name": "account_status",
       "entityType": "enums",
       "schema": "public"
@@ -40,33 +34,19 @@
       "schema": "public"
     },
     {
-      "values": [
-        "Single",
-        "Married",
-        "Widowed",
-        "Separated"
-      ],
+      "values": ["Single", "Married", "Widowed", "Separated"],
       "name": "civil_status",
       "entityType": "enums",
       "schema": "public"
     },
     {
-      "values": [
-        "Member",
-        "Vice Chairperson",
-        "Committee Secretary"
-      ],
+      "values": ["Member", "Vice Chairperson", "Committee Secretary"],
       "name": "committee_role",
       "entityType": "enums",
       "schema": "public"
     },
     {
-      "values": [
-        "Pending Review",
-        "Approved",
-        "Released / Printed",
-        "Rejected"
-      ],
+      "values": ["Pending Review", "Approved", "Released / Printed", "Rejected"],
       "name": "document_status",
       "entityType": "enums",
       "schema": "public"
@@ -85,98 +65,55 @@
       "schema": "public"
     },
     {
-      "values": [
-        "Elementary",
-        "High School",
-        "College",
-        "Vocational",
-        "Post-Graduate"
-      ],
+      "values": ["Elementary", "High School", "College", "Vocational", "Post-Graduate"],
       "name": "education",
       "entityType": "enums",
       "schema": "public"
     },
     {
-      "values": [
-        "Male",
-        "Female"
-      ],
+      "values": ["Male", "Female"],
       "name": "gender",
       "entityType": "enums",
       "schema": "public"
     },
     {
-      "values": [
-        "Pending Captain Approval",
-        "Scheduled",
-        "In Progress",
-        "Adjourned",
-        "Cancelled"
-      ],
+      "values": ["Pending Captain Approval", "Scheduled", "In Progress", "Adjourned", "Cancelled"],
       "name": "meeting_status",
       "entityType": "enums",
       "schema": "public"
     },
     {
-      "values": [
-        "Regular Session",
-        "Special Session",
-        "Barangay Assembly",
-        "Committee Hearing"
-      ],
+      "values": ["Regular Session", "Special Session", "Barangay Assembly", "Committee Hearing"],
       "name": "meeting_type",
       "entityType": "enums",
       "schema": "public"
     },
     {
-      "values": [
-        "Cash",
-        "GCash / Electronic",
-        "Bank Transfer"
-      ],
+      "values": ["Cash", "GCash / Electronic", "Bank Transfer"],
       "name": "payment_method",
       "entityType": "enums",
       "schema": "public"
     },
     {
-      "values": [
-        "Paid",
-        "Pending Payment",
-        "Waived (Exempt)"
-      ],
+      "values": ["Paid", "Pending Payment", "Waived (Exempt)"],
       "name": "payment_status",
       "entityType": "enums",
       "schema": "public"
     },
     {
-      "values": [
-        "Planning",
-        "Ongoing",
-        "Completed",
-        "On Hold"
-      ],
+      "values": ["Planning", "Ongoing", "Completed", "On Hold"],
       "name": "project_status",
       "entityType": "enums",
       "schema": "public"
     },
     {
-      "values": [
-        "captain",
-        "secretary",
-        "councilor",
-        "treasurer",
-        "staff",
-        "tanod"
-      ],
+      "values": ["captain", "secretary", "councilor", "treasurer", "staff", "tanod"],
       "name": "user_role",
       "entityType": "enums",
       "schema": "public"
     },
     {
-      "values": [
-        "Registered Voter",
-        "Non-Voter"
-      ],
+      "values": ["Registered Voter", "Non-Voter"],
       "name": "voter_status",
       "entityType": "enums",
       "schema": "public"
@@ -1997,14 +1934,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "posted_by_id"
-      ],
+      "columns": ["posted_by_id"],
       "schemaTo": "public",
       "tableTo": "users",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "NO ACTION",
       "name": "announcements_posted_by_id_users_id_fkey",
@@ -2014,14 +1947,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "committee_id"
-      ],
+      "columns": ["committee_id"],
       "schemaTo": "public",
       "tableTo": "committees",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "NO ACTION",
       "name": "committee_members_committee_id_committees_id_fkey",
@@ -2031,14 +1960,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "committee_id"
-      ],
+      "columns": ["committee_id"],
       "schemaTo": "public",
       "tableTo": "committees",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "NO ACTION",
       "name": "committee_projects_committee_id_committees_id_fkey",
@@ -2048,14 +1973,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "assigned_councilor_id"
-      ],
+      "columns": ["assigned_councilor_id"],
       "schemaTo": "public",
       "tableTo": "users",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "NO ACTION",
       "name": "committees_assigned_councilor_id_users_id_fkey",
@@ -2065,14 +1986,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "prepared_by_id"
-      ],
+      "columns": ["prepared_by_id"],
       "schemaTo": "public",
       "tableTo": "users",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "NO ACTION",
       "name": "disbursement_vouchers_prepared_by_id_users_id_fkey",
@@ -2082,14 +1999,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "approved_by_id"
-      ],
+      "columns": ["approved_by_id"],
       "schemaTo": "public",
       "tableTo": "users",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "NO ACTION",
       "name": "disbursement_vouchers_approved_by_id_users_id_fkey",
@@ -2099,14 +2012,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "resident_id"
-      ],
+      "columns": ["resident_id"],
       "schemaTo": "public",
       "tableTo": "residents",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "NO ACTION",
       "name": "document_requests_resident_id_residents_id_fkey",
@@ -2116,14 +2025,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "approved_by_id"
-      ],
+      "columns": ["approved_by_id"],
       "schemaTo": "public",
       "tableTo": "users",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "NO ACTION",
       "name": "document_requests_approved_by_id_users_id_fkey",
@@ -2133,14 +2038,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "sector_id"
-      ],
+      "columns": ["sector_id"],
       "schemaTo": "public",
       "tableTo": "sectors",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "NO ACTION",
       "name": "households_sector_id_sectors_id_fkey",
@@ -2150,14 +2051,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "payor_id"
-      ],
+      "columns": ["payor_id"],
       "schemaTo": "public",
       "tableTo": "residents",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "NO ACTION",
       "name": "official_receipts_payor_id_residents_id_fkey",
@@ -2167,14 +2064,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "issued_by_id"
-      ],
+      "columns": ["issued_by_id"],
       "schemaTo": "public",
       "tableTo": "users",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "NO ACTION",
       "name": "official_receipts_issued_by_id_users_id_fkey",
@@ -2184,14 +2077,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "household_id"
-      ],
+      "columns": ["household_id"],
       "schemaTo": "public",
       "tableTo": "households",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "NO ACTION",
       "name": "residents_household_id_households_id_fkey",
@@ -2201,14 +2090,10 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "assigned_councilor_id"
-      ],
+      "columns": ["assigned_councilor_id"],
       "schemaTo": "public",
       "tableTo": "users",
-      "columnsTo": [
-        "id"
-      ],
+      "columnsTo": ["id"],
       "onUpdate": "NO ACTION",
       "onDelete": "NO ACTION",
       "name": "sectors_assigned_councilor_id_users_id_fkey",
@@ -2217,9 +2102,7 @@
       "table": "sectors"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "announcements_pkey",
       "schema": "public",
@@ -2227,9 +2110,7 @@
       "entityType": "pks"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "budget_items_pkey",
       "schema": "public",
@@ -2237,9 +2118,7 @@
       "entityType": "pks"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "committee_members_pkey",
       "schema": "public",
@@ -2247,9 +2126,7 @@
       "entityType": "pks"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "committee_projects_pkey",
       "schema": "public",
@@ -2257,9 +2134,7 @@
       "entityType": "pks"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "committees_pkey",
       "schema": "public",
@@ -2267,9 +2142,7 @@
       "entityType": "pks"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "disbursement_vouchers_pkey",
       "schema": "public",
@@ -2277,9 +2150,7 @@
       "entityType": "pks"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "document_requests_pkey",
       "schema": "public",
@@ -2287,9 +2158,7 @@
       "entityType": "pks"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "households_pkey",
       "schema": "public",
@@ -2297,9 +2166,7 @@
       "entityType": "pks"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "official_receipts_pkey",
       "schema": "public",
@@ -2307,9 +2174,7 @@
       "entityType": "pks"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "residents_pkey",
       "schema": "public",
@@ -2317,9 +2182,7 @@
       "entityType": "pks"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "sectors_pkey",
       "schema": "public",
@@ -2327,9 +2190,7 @@
       "entityType": "pks"
     },
     {
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nameExplicit": false,
       "name": "users_pkey",
       "schema": "public",
@@ -2338,9 +2199,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nullsNotDistinct": false,
       "name": "announcements_id_key",
       "schema": "public",
@@ -2349,9 +2208,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nullsNotDistinct": false,
       "name": "budget_items_id_key",
       "schema": "public",
@@ -2360,9 +2217,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nullsNotDistinct": false,
       "name": "committee_members_id_key",
       "schema": "public",
@@ -2371,9 +2226,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nullsNotDistinct": false,
       "name": "committee_projects_id_key",
       "schema": "public",
@@ -2382,9 +2235,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nullsNotDistinct": false,
       "name": "committees_id_key",
       "schema": "public",
@@ -2393,9 +2244,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nullsNotDistinct": false,
       "name": "disbursement_vouchers_id_key",
       "schema": "public",
@@ -2404,9 +2253,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "voucher_no"
-      ],
+      "columns": ["voucher_no"],
       "nullsNotDistinct": false,
       "name": "disbursement_vouchers_voucher_no_key",
       "schema": "public",
@@ -2415,9 +2262,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nullsNotDistinct": false,
       "name": "document_requests_id_key",
       "schema": "public",
@@ -2426,9 +2271,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "control_no"
-      ],
+      "columns": ["control_no"],
       "nullsNotDistinct": false,
       "name": "document_requests_control_no_key",
       "schema": "public",
@@ -2437,9 +2280,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nullsNotDistinct": false,
       "name": "households_id_key",
       "schema": "public",
@@ -2448,9 +2289,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "household_number"
-      ],
+      "columns": ["household_number"],
       "nullsNotDistinct": false,
       "name": "households_household_number_key",
       "schema": "public",
@@ -2459,9 +2298,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nullsNotDistinct": false,
       "name": "official_receipts_id_key",
       "schema": "public",
@@ -2470,9 +2307,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "or_no"
-      ],
+      "columns": ["or_no"],
       "nullsNotDistinct": false,
       "name": "official_receipts_or_no_key",
       "schema": "public",
@@ -2481,9 +2316,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "id"
-      ],
+      "columns": ["id"],
       "nullsNotDistinct": false,
       "name": "residents_id_key",
       "schema": "public",
@@ -2492,9 +2325,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "name"
-      ],
+      "columns": ["name"],
       "nullsNotDistinct": false,
       "name": "sectors_name_key",
       "schema": "public",
@@ -2503,9 +2334,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "clerk_id"
-      ],
+      "columns": ["clerk_id"],
       "nullsNotDistinct": false,
       "name": "users_clerk_id_key",
       "schema": "public",
@@ -2514,9 +2343,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "email_address"
-      ],
+      "columns": ["email_address"],
       "nullsNotDistinct": false,
       "name": "users_email_address_key",
       "schema": "public",
@@ -2525,9 +2352,7 @@
     },
     {
       "nameExplicit": false,
-      "columns": [
-        "username"
-      ],
+      "columns": ["username"],
       "nullsNotDistinct": false,
       "name": "users_username_key",
       "schema": "public",
@@ -2537,9 +2362,7 @@
     {
       "as": "PERMISSIVE",
       "for": "INSERT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": null,
       "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "name": "Announcement Insert Policy",
@@ -2550,9 +2373,7 @@
     {
       "as": "PERMISSIVE",
       "for": "SELECT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": null,
       "name": "Announcement Select Policy",
@@ -2563,9 +2384,7 @@
     {
       "as": "PERMISSIVE",
       "for": "UPDATE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "name": "Announcement Update Policy",
@@ -2576,9 +2395,7 @@
     {
       "as": "PERMISSIVE",
       "for": "DELETE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": null,
       "name": "Announcement Delete Policy",
@@ -2589,9 +2406,7 @@
     {
       "as": "PERMISSIVE",
       "for": "INSERT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": null,
       "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "name": "Budget Item Insert Policy",
@@ -2602,9 +2417,7 @@
     {
       "as": "PERMISSIVE",
       "for": "SELECT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": null,
       "name": "Budget Item Select Policy",
@@ -2615,9 +2428,7 @@
     {
       "as": "PERMISSIVE",
       "for": "UPDATE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "name": "Budget Item Update Policy",
@@ -2628,9 +2439,7 @@
     {
       "as": "PERMISSIVE",
       "for": "DELETE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": null,
       "name": "Budget Item Delete Policy",
@@ -2641,9 +2450,7 @@
     {
       "as": "PERMISSIVE",
       "for": "INSERT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": null,
       "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "name": "Committee Member Insert Policy",
@@ -2654,9 +2461,7 @@
     {
       "as": "PERMISSIVE",
       "for": "SELECT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": null,
       "name": "Committee Member Select Policy",
@@ -2667,9 +2472,7 @@
     {
       "as": "PERMISSIVE",
       "for": "UPDATE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "name": "Committee Member Update Policy",
@@ -2680,9 +2483,7 @@
     {
       "as": "PERMISSIVE",
       "for": "DELETE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": null,
       "name": "Committee Member Delete Policy",
@@ -2693,9 +2494,7 @@
     {
       "as": "PERMISSIVE",
       "for": "INSERT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": null,
       "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "name": "Committee Project Insert Policy",
@@ -2706,9 +2505,7 @@
     {
       "as": "PERMISSIVE",
       "for": "SELECT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": null,
       "name": "Committee Project Select Policy",
@@ -2719,9 +2516,7 @@
     {
       "as": "PERMISSIVE",
       "for": "UPDATE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "name": "Committee Project Update Policy",
@@ -2732,9 +2527,7 @@
     {
       "as": "PERMISSIVE",
       "for": "DELETE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": null,
       "name": "Committee Project Delete Policy",
@@ -2745,9 +2538,7 @@
     {
       "as": "PERMISSIVE",
       "for": "INSERT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": null,
       "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "name": "Committee Insert Policy",
@@ -2758,9 +2549,7 @@
     {
       "as": "PERMISSIVE",
       "for": "SELECT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": null,
       "name": "Committee Select Policy",
@@ -2771,9 +2560,7 @@
     {
       "as": "PERMISSIVE",
       "for": "UPDATE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "name": "Committee Update Policy",
@@ -2784,9 +2571,7 @@
     {
       "as": "PERMISSIVE",
       "for": "DELETE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": null,
       "name": "Committee Delete Policy",
@@ -2797,9 +2582,7 @@
     {
       "as": "PERMISSIVE",
       "for": "INSERT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": null,
       "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "name": "Budget Item Insert Policy",
@@ -2810,9 +2593,7 @@
     {
       "as": "PERMISSIVE",
       "for": "SELECT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": null,
       "name": "Budget Item Select Policy",
@@ -2823,9 +2604,7 @@
     {
       "as": "PERMISSIVE",
       "for": "UPDATE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "name": "Budget Item Update Policy",
@@ -2836,9 +2615,7 @@
     {
       "as": "PERMISSIVE",
       "for": "DELETE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": null,
       "name": "Budget Item Delete Policy",
@@ -2849,9 +2626,7 @@
     {
       "as": "PERMISSIVE",
       "for": "INSERT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": null,
       "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "name": "Document Request Insert Policy",
@@ -2862,9 +2637,7 @@
     {
       "as": "PERMISSIVE",
       "for": "SELECT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": null,
       "name": "Document Request Select Policy",
@@ -2875,9 +2648,7 @@
     {
       "as": "PERMISSIVE",
       "for": "UPDATE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "name": "Document Request Update Policy",
@@ -2888,9 +2659,7 @@
     {
       "as": "PERMISSIVE",
       "for": "DELETE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": null,
       "name": "Document Request Delete Policy",
@@ -2901,9 +2670,7 @@
     {
       "as": "PERMISSIVE",
       "for": "INSERT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": null,
       "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "name": "Households Insert Policy",
@@ -2914,9 +2681,7 @@
     {
       "as": "PERMISSIVE",
       "for": "SELECT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": null,
       "name": "Households Select Policy",
@@ -2927,9 +2692,7 @@
     {
       "as": "PERMISSIVE",
       "for": "UPDATE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "name": "Households Update Policy",
@@ -2940,9 +2703,7 @@
     {
       "as": "PERMISSIVE",
       "for": "DELETE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": null,
       "name": "Households Delete Policy",
@@ -2953,9 +2714,7 @@
     {
       "as": "PERMISSIVE",
       "for": "INSERT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": null,
       "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "name": "Official Receipt Insert Policy",
@@ -2966,9 +2725,7 @@
     {
       "as": "PERMISSIVE",
       "for": "SELECT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": null,
       "name": "Official Receipt Select Policy",
@@ -2979,9 +2736,7 @@
     {
       "as": "PERMISSIVE",
       "for": "UPDATE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "name": "Official Receipt Update Policy",
@@ -2992,9 +2747,7 @@
     {
       "as": "PERMISSIVE",
       "for": "DELETE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": null,
       "name": "Official Receipt Delete Policy",
@@ -3005,9 +2758,7 @@
     {
       "as": "PERMISSIVE",
       "for": "INSERT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": null,
       "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "name": "Resident Insert Policy",
@@ -3018,9 +2769,7 @@
     {
       "as": "PERMISSIVE",
       "for": "SELECT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": null,
       "name": "Resident Select Policy",
@@ -3031,9 +2780,7 @@
     {
       "as": "PERMISSIVE",
       "for": "UPDATE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "name": "Resident Update Policy",
@@ -3044,9 +2791,7 @@
     {
       "as": "PERMISSIVE",
       "for": "DELETE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": null,
       "name": "Resident Delete Policy",
@@ -3057,9 +2802,7 @@
     {
       "as": "PERMISSIVE",
       "for": "INSERT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": null,
       "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "name": "Sector Insert Policy",
@@ -3070,9 +2813,7 @@
     {
       "as": "PERMISSIVE",
       "for": "SELECT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": null,
       "name": "Sector Select Policy",
@@ -3083,9 +2824,7 @@
     {
       "as": "PERMISSIVE",
       "for": "UPDATE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "name": "Sector Update Policy",
@@ -3096,9 +2835,7 @@
     {
       "as": "PERMISSIVE",
       "for": "DELETE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "exists (\n  select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')\n)",
       "withCheck": null,
       "name": "Sector Delete Policy",
@@ -3109,9 +2846,7 @@
     {
       "as": "PERMISSIVE",
       "for": "INSERT",
-      "roles": [
-        "service_role"
-      ],
+      "roles": ["service_role"],
       "using": null,
       "withCheck": "true",
       "name": "User Insert Policy",
@@ -3122,9 +2857,7 @@
     {
       "as": "PERMISSIVE",
       "for": "SELECT",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "(select auth.jwt() ->> 'sub') = (clerk_id)::text",
       "withCheck": null,
       "name": "User Select Policy",
@@ -3135,9 +2868,7 @@
     {
       "as": "PERMISSIVE",
       "for": "UPDATE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "(select auth.jwt() ->> 'sub') = (clerk_id)::text",
       "withCheck": "(select auth.jwt() ->> 'sub') = (clerk_id)::text",
       "name": "User Update Policy",
@@ -3148,9 +2879,7 @@
     {
       "as": "PERMISSIVE",
       "for": "DELETE",
-      "roles": [
-        "authenticated"
-      ],
+      "roles": ["authenticated"],
       "using": "(select auth.jwt() ->> 'sub') = (clerk_id)::text",
       "withCheck": null,
       "name": "User Delete Policy",

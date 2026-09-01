@@ -45,12 +45,12 @@ export function SectorContextProvider({ children }: React.PropsWithChildren) {
   } = useGetAllSectorsQuery();
 
   const sectorMapped: SectorProps[] =
-    sectors?.data.map(({ first_name, last_name, sector_id, sector }, index) => ({
-      assignedCouncil: `${first_name} ${last_name}`,
+    sectors?.data.map(({ firstName, lastName, sectors }, index) => ({
+      assignedCouncil: `${firstName} ${lastName}`,
       code: `SEC-${index + 1}`,
-      id: sector_id ?? '',
-      name: sector.name,
-      purokCoverage: sector.puroks.map((p) => p.name),
+      id: sectors?.id ?? '',
+      name: sectors?.name ?? '',
+      purokCoverage: sectors?.purokCoverage ?? [],
     })) ?? [];
 
   return (

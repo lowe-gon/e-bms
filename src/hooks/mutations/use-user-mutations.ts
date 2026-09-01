@@ -1,13 +1,13 @@
 import type {
-  CreateUserSchemaProps,
-  EditUserSchemaProps,
-} from '@/features/accounts/schema/user.scheme';
+  CreateUserFormSchemaProps,
+  EditUserFormSchemaProps,
+} from '@/features/accounts/schema/user-form.scheme';
 import { getQueryClient } from '@/lib/query-client';
 import { catchFetch } from '@/lib/try-catch';
 import type { ResponseData, Users } from '@/typings';
 import { useMutation } from '@tanstack/react-query';
 
-async function createUserApi(schema: CreateUserSchemaProps) {
+async function createUserApi(schema: CreateUserFormSchemaProps) {
   const formData = new FormData();
 
   formData.append('firstName', schema.firstName);
@@ -37,7 +37,7 @@ async function createUserApi(schema: CreateUserSchemaProps) {
   return data;
 }
 
-async function updateUserApi(schema: EditUserSchemaProps, userId: string) {
+async function updateUserApi(schema: EditUserFormSchemaProps, userId: string) {
   const formData = new FormData();
 
   formData.append('firstName', schema.lastName);
@@ -98,7 +98,7 @@ export function useUpdateUserMutation() {
 
   return useMutation({
     mutationKey: ['users'],
-    mutationFn: async ({ data, userId }: { data: EditUserSchemaProps; userId: string }) =>
+    mutationFn: async ({ data, userId }: { data: EditUserFormSchemaProps; userId: string }) =>
       await updateUserApi(data, userId),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['users'], refetchType: 'all' }),
   });

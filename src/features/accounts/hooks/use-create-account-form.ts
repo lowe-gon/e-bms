@@ -1,7 +1,7 @@
 import {
-  CreateUserSchema,
-  type CreateUserSchemaProps,
-} from '@/features/accounts/schema/user.scheme';
+  CreateUserFormSchema,
+  type CreateUserFormSchemaProps,
+} from '@/features/accounts/schema/user-form.scheme';
 import { useCreateUserMutation } from '@/hooks/mutations/use-user-mutations';
 import useZodForm from '@/hooks/use-zod-form';
 import React from 'react';
@@ -9,7 +9,7 @@ import { useWatch, type SubmitHandler } from 'react-hook-form';
 import { toast } from 'sonner';
 
 export default function useCreateAccountForm() {
-  const form = useZodForm<CreateUserSchemaProps>({
+  const form = useZodForm<CreateUserFormSchemaProps>({
     defaultValues: {
       firstName: '',
       lastName: '',
@@ -19,12 +19,12 @@ export default function useCreateAccountForm() {
       username: '',
       password: '',
     },
-    schema: CreateUserSchema,
+    schema: CreateUserFormSchema,
   });
 
   const { mutateAsync } = useCreateUserMutation();
 
-  const onSubmitHandler: SubmitHandler<CreateUserSchemaProps> = React.useCallback(
+  const onSubmitHandler: SubmitHandler<CreateUserFormSchemaProps> = React.useCallback(
     async (data) => {
       try {
         await mutateAsync(data);

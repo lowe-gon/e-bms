@@ -16,7 +16,7 @@ export default function useCreateSectorForm({
   const form = useZodForm<SectorFormSchemaProps>({
     defaultValues: {
       assignedOfficial: '',
-      purok: [''],
+      purok: [],
       sectorName: '',
     },
     schema: SectorFormSchema,

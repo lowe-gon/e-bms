@@ -1,7 +1,7 @@
-import { SectorContextProvider } from '@/context/sectors.context';
 import SectorBanner from '@/features/sectors/components/banner';
 import HouseholdTable from '@/features/sectors/components/household-table';
 import SectorDetails from '@/features/sectors/components/sector-details';
+import { SectorContextProvider } from '@/features/sectors/context/sectors.context';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {

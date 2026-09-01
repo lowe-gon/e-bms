@@ -1,4 +1,7 @@
-import { EditUserSchema, type EditUserSchemaProps } from '@/features/accounts/schema/user.scheme';
+import {
+  EditUserFormSchema,
+  type EditUserFormSchemaProps,
+} from '@/features/accounts/schema/user-form.scheme';
 import { useUpdateUserMutation } from '@/hooks/mutations/use-user-mutations';
 import useZodForm from '@/hooks/use-zod-form';
 import type { Users } from '@/typings';
@@ -14,7 +17,7 @@ export default function useEditUserForm({
   role,
   clerkId,
 }: Users) {
-  const form = useZodForm<EditUserSchemaProps>({
+  const form = useZodForm<EditUserFormSchemaProps>({
     defaultValues: {
       firstName: firstName || '',
       lastName: lastName || '',
@@ -22,12 +25,12 @@ export default function useEditUserForm({
       role: role || '',
       emailAddress: emailAddress || '',
     },
-    schema: EditUserSchema,
+    schema: EditUserFormSchema,
   });
 
   const { mutateAsync } = useUpdateUserMutation();
 
-  const onSubmitHandler: SubmitHandler<EditUserSchemaProps> = React.useCallback(
+  const onSubmitHandler: SubmitHandler<EditUserFormSchemaProps> = React.useCallback(
     async (data) => {
       try {
         await mutateAsync({

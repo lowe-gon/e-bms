@@ -3,7 +3,7 @@ import * as z from 'zod';
 const MAX_FILE_SIZE = 5000000; // 5MB
 const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
 
-export const CreateUserSchema = z.object({
+export const CreateUserFormSchema = z.object({
   firstName: z
     .string({
       error: (iss) => (iss.input === undefined ? 'firstName schema is required' : 'Invalid schema'),
@@ -43,10 +43,10 @@ export const CreateUserSchema = z.object({
   }),
 });
 
-export const EditUserSchema = CreateUserSchema.omit({
+export const EditUserFormSchema = CreateUserFormSchema.omit({
   password: true,
   username: true,
 });
 
-export type EditUserSchemaProps = z.infer<typeof EditUserSchema>;
-export type CreateUserSchemaProps = z.infer<typeof CreateUserSchema>;
+export type EditUserFormSchemaProps = z.infer<typeof EditUserFormSchema>;
+export type CreateUserFormSchemaProps = z.infer<typeof CreateUserFormSchema>;

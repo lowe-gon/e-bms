@@ -1,7 +1,10 @@
 import { STATUS_CODE } from '@/constants/http-status-code';
 import database from '@/database';
 import { userTable } from '@/database/schema';
-import { CreateUserSchema, EditUserSchema } from '@/features/accounts/schema/user.scheme';
+import {
+  CreateUserFormSchema,
+  EditUserFormSchema,
+} from '@/features/accounts/schema/user-form.scheme';
 import { withAuth } from '@/helpers/with-auth';
 import { parseQueryParams } from '@/lib/parse-query';
 import { parseRequest } from '@/lib/parse-request';
@@ -13,7 +16,7 @@ import { NextResponse } from 'next/server';
 
 export const POST = withAuth(async (req): Promise<NextResponse<ResponseData<Users | null>>> => {
   try {
-    const parsedSchema = await parseRequest(req, CreateUserSchema);
+    const parsedSchema = await parseRequest(req, CreateUserFormSchema);
 
     if (!parsedSchema.success) {
       return parsedSchema.response;
@@ -114,7 +117,7 @@ export const PUT = withAuth(async (req): Promise<NextResponse<ResponseData<Users
   try {
     const { raw } = parseQueryParams(req);
     const userId = raw.get('userId') as string;
-    const parsedSchema = await parseRequest(req, EditUserSchema);
+    const parsedSchema = await parseRequest(req, EditUserFormSchema);
 
     if (!parsedSchema.success) {
       return parsedSchema.response;
