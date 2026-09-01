@@ -1,7 +1,7 @@
-type SuccessResult<T> = readonly [T, null];
+export type SuccessResult<T> = readonly [T, null];
 type ErrorResult<E = Error> = readonly [null, E];
 
-type Result<T, E = Error> = SuccessResult<T> | ErrorResult<E>;
+export type Result<T, E = Error> = SuccessResult<T> | ErrorResult<E>;
 
 /**
  * A utility function that wraps a promise and returns a tuple containing

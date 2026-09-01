@@ -1,3 +1,6 @@
+import { auth } from '@clerk/nextjs/server';
+
 export default async function DashboardPage() {
-  return <div>Dashboard</div>;
+  const { isAuthenticated } = await auth();
+  return <div>Dashboard: {isAuthenticated ?? false}</div>;
 }

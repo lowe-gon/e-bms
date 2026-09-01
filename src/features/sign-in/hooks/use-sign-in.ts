@@ -14,7 +14,7 @@ export default function useSignIn() {
   const { signIn, fetchStatus } = useClerkSignIn();
   const form = useZodForm<TSignInFormSchema>({
     defaultValues: {
-      username: 'a',
+      username: '',
       password: '',
     },
     schema: ZSignInFormSchema,

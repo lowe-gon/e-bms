@@ -1,6 +1,6 @@
 import database from '@/database';
 import { userTable } from '@/database/schema';
-import { tryCatch } from '@/lib/trycatch';
+import { tryCatch } from '@/lib/try-catch';
 import type { TUsers } from '@/typings';
 import { verifyWebhook } from '@clerk/nextjs/webhooks';
 import { eq } from 'drizzle-orm';

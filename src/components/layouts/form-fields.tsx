@@ -56,6 +56,7 @@ export function FormFieldFloatingLabelInput<TFieldValues extends FieldValues>({
               <InputGroupInput
                 {...field}
                 {...props}
+                type={inputType}
                 onChange={(e) => field.onChange(e)}
                 placeholder={placeholder}
                 className={cn(
