@@ -127,4 +127,10 @@
   html {
     @apply font-sans;
   }
+  .banner-title {
+    @apply text-xl font-black md:text-3xl;
+  }
+  .banner-description {
+    @apply text-muted-foreground text-xs font-medium md:text-sm;
+  }
 }

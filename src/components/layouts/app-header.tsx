@@ -22,7 +22,8 @@ export default function AppHeader() {
         return 'Documents & Clearances';
       case '/meetings':
         return 'Meetings & Ordinances';
-      case '/sectors':
+      case '/accounts':
+        return 'User Accounts & Roles';
       case '/committees':
         return 'Council Standing Committees';
       case '/sectors':

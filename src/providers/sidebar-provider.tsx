@@ -10,7 +10,7 @@ import React from 'react';
 export default function SidebarProvider({ children }: React.PropsWithChildren) {
   const { data: user, isFetching: isLoading } = useGetUserQuery();
 
-  if (isLoading || !user) {
+  if (isLoading || !user?.data) {
     return <LoadingScreen />;
   }
 
@@ -23,7 +23,7 @@ export default function SidebarProvider({ children }: React.PropsWithChildren) {
             '--header-height': 'calc(var(--spacing) * 12)',
           } as React.CSSProperties
         }>
-        <AppSidebar variant="inset" user={user} />
+        <AppSidebar variant="inset" user={user.data} />
         <SidebarInset>
           <AppHeader />
           <div className="@container/main flex flex-1 flex-col gap-4 p-4 pt-0">{children}</div>

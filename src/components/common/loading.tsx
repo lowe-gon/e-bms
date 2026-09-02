@@ -80,7 +80,6 @@ export function LoadingScreen({
 }: ILoadingScreenProps) {
   const steps = customSteps && customSteps.length > 0 ? customSteps : DEFAULT_INIT_STEPS;
   const [currentStepIndex, setCurrentStepIndex] = React.useState(0);
-  const [isFinishing, setIsFinishing] = React.useState(false);
 
   React.useEffect(() => {
     const stepDuration = durationMs / (steps.length + 1);
@@ -98,7 +97,6 @@ export function LoadingScreen({
     }, stepDuration);
 
     const completionTimer = setTimeout(() => {
-      setIsFinishing(true);
       setTimeout(() => {
         if (onComplete) onComplete();
       }, 300);
@@ -115,12 +113,11 @@ export function LoadingScreen({
   return (
     <div
       className={cn(
-        'bg-background text-foreground relative flex flex-col items-center justify-between p-6 transition-opacity duration-300 select-none sm:p-10',
+        'text-foreground bg-background relative flex flex-col items-center justify-between p-6 transition-opacity duration-300 select-none sm:p-10',
         isOverlay ? 'fixed inset-0 z-50' : 'min-h-screen',
-        isFinishing ? 'opacity-0' : 'opacity-100',
       )}>
       {/* Center Minimal Circular Content */}
-      <main className="my-auto flex w-full max-w-sm flex-col items-center space-y-6 text-center">
+      <main className="bg-background my-auto flex w-full max-w-sm flex-col items-center space-y-6 text-center">
         {/* Clean circular spinner */}
         <div className="relative flex h-16 w-16 items-center justify-center">
           <div className="border-primary absolute inset-0 rounded-full border-2" />

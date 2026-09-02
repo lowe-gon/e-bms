@@ -1,6 +1,6 @@
 'use client';
 
-import { FormFieldFloatingLabelInput } from '@/components/layouts/form-fields';
+import { FormFieldFloatingLabelInput } from '@/components/common/form-fields';
 import { Button } from '@/components/ui/button';
 import { FieldGroup } from '@/components/ui/field';
 import useSignIn from '@/features/sign-in/hooks/use-sign-in';
