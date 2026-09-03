@@ -13,6 +13,7 @@ type TGlobalUIState = {
   };
   filters: {
     search: string;
+    role: string;
   };
 };
 
@@ -22,6 +23,7 @@ type TGlobalUIAction = {
   setSortingSortBy: (value: string) => void;
   setSortingSortOrder: (value: 'asc' | 'desc') => void;
   setFiltersSearch: (value: string) => void;
+  setFiltersRole: (value: string) => void;
 };
 
 export type TGlobalUIStore = TGlobalUIState & TGlobalUIAction;
@@ -29,6 +31,7 @@ export type TGlobalUIStore = TGlobalUIState & TGlobalUIAction;
 export const initialState: TGlobalUIState = {
   filters: {
     search: '',
+    role: '',
   },
   sorting: {
     sortBy: '',
@@ -49,6 +52,12 @@ export const useGlobalUIStore = create<TGlobalUIStore>()(
       setFiltersSearch: (value) => {
         set((state) => {
           state.filters.search = value;
+        });
+      },
+
+      setFiltersRole: (value) => {
+        set((state) => {
+          state.filters.role = value;
         });
       },
 

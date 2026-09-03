@@ -4,9 +4,10 @@ import { useShallow } from 'zustand/shallow';
 import { getUsers } from '../api/get-users.api';
 
 export default function useGetUsersQuery() {
-  const { searchQuery, page, limit, sortBy, sortOrder } = useGlobalUIStore(
+  const { searchQuery, role, page, limit, sortBy, sortOrder } = useGlobalUIStore(
     useShallow((state) => ({
       searchQuery: state.filters.search,
+      role: state.filters.role,
       page: state.pagination.page,
       limit: state.pagination.limit,
       sortBy: state.sorting.sortBy,
@@ -19,7 +20,8 @@ export default function useGetUsersQuery() {
       'users',
       {
         searchQuery,
-        page,
+        role,
+        page: page + 1,
         limit,
         sortBy,
         sortOrder,
@@ -28,7 +30,8 @@ export default function useGetUsersQuery() {
     queryFn: async ({ signal }) =>
       await getUsers({
         limit,
-        page,
+        page: page + 1,
+        role,
         searchQuery,
         signal,
         sortBy,

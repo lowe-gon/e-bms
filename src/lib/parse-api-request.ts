@@ -104,6 +104,22 @@ export function parseRequestQueryParams(req: NextRequest, options: QueryOptions 
   // Empty search values are normalized to an empty string.
   const search = searchParams.get('search')?.trim() || '';
 
+  // Helper to split pipe-delimited query parameters
+  const rawArray = (searchParam: string): string[] | undefined => {
+    const value = searchParams.get(searchParam);
+    if (!value) return undefined;
+
+    if (value.includes('|')) {
+      return value
+        .split('|')
+        .map((t: string) => t.trim())
+        .filter((t: string) => t.toUpperCase() !== '');
+    }
+
+    const trimmed = value.trim();
+    return trimmed !== '' ? [trimmed] : undefined;
+  };
+
   // Return undefined when no status filter is provided.
   const status = searchParams.get('status') || undefined;
 
@@ -137,5 +153,6 @@ export function parseRequestQueryParams(req: NextRequest, options: QueryOptions 
     // Preserve the original query parameters in case
     // additional/custom parameters need to be accessed later.
     raw: searchParams,
+    rawArray,
   };
 }

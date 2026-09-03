@@ -1,4 +1,4 @@
-import { ROLES } from '@/constants/user-role';
+import { ROLES, type UserRole } from '@/constants/user-role';
 import database from '@/database';
 import { sectorTable, userTable } from '@/database/schema';
 import {
@@ -13,7 +13,18 @@ import { withRole } from '@/lib/with-role';
 import type { TUsers, TUserWithSector } from '@/typings';
 import type { ApiResponse } from '@/typings/api.types';
 import { clerkClient } from '@clerk/nextjs/server';
-import { asc, count, desc, eq, ilike, or, type AnyColumn } from 'drizzle-orm';
+import {
+  and,
+  asc,
+  countDistinct,
+  desc,
+  eq,
+  ilike,
+  inArray,
+  or,
+  sql,
+  type AnyColumn,
+} from 'drizzle-orm';
 import type { NextResponse } from 'next/server';
 
 const ALLOWED_SORT_COLUMNS = new Set(['createdAt', 'role']);
@@ -26,8 +37,9 @@ export const GET = withRole(
       pagination: { limit, page, offset },
       filters: { search },
       sorting: { sortBy, sortOrder },
+      rawArray,
     } = parseRequestQueryParams(request);
-
+    const userRoles = rawArray('role') as UserRole[];
     const sortColumns = Array.isArray(sortBy) ? sortBy : [sortBy];
 
     const isAsc = sortOrder === 'asc';
@@ -41,25 +53,41 @@ export const GET = withRole(
       validSortColumns.length > 0
         ? validSortColumns.map((col) => sortDirection(userTable[col] as AnyColumn))
         : [desc(userTable.createdAt)];
+
     const searchFilter = search
-      ? or(ilike(userTable.firstName, `%${search}%`), ilike(userTable.lastName, `%${search}%`))
+      ? or(
+          ilike(userTable.firstName, `%${search}%`),
+          ilike(userTable.lastName, `%${search}%`),
+          ilike(userTable.username, `%${search}%`),
+
+          and(sql`${sectorTable.name} IS NOT NULL`, ilike(sectorTable.name, `%${search}%`)),
+        )
       : undefined;
+
+    const roleFilter =
+      userRoles && userRoles.length > 0 ? inArray(userTable.role, userRoles) : undefined;
+
+    const whereCondition = and(searchFilter, roleFilter);
 
     try {
       const [result, resultError] = await tryCatch(
         database.transaction(async (tx) => {
-          const result = await tx.select({ count: count() }).from(userTable).where(searchFilter);
+          const result = await tx
+            .select({ count: countDistinct(userTable.id) })
+            .from(userTable)
+            .leftJoin(sectorTable, eq(sectorTable.assignedCouncilorId, userTable.id))
+            .where(whereCondition);
 
           const total = result?.[0]?.count ?? 0;
 
           const users = await tx
             .select()
             .from(userTable)
-            .where(searchFilter)
+            .leftJoin(sectorTable, eq(sectorTable.assignedCouncilorId, userTable.id))
+            .where(whereCondition)
             .orderBy(...orderByClauses)
             .offset(offset)
-            .limit(limit)
-            .leftJoin(sectorTable, eq(sectorTable.assignedCouncilorId, userTable.id));
+            .limit(limit);
 
           return {
             users,
