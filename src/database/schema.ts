@@ -6,6 +6,7 @@ import {
   numeric,
   pgEnum,
   pgPolicy,
+  pgSequence,
   pgTable,
   text,
   timestamp,
@@ -17,6 +18,9 @@ const isAuthenticated = sql`(select auth.jwt() ->> 'sub') = (clerk_id)::text`;
 const isCheckUserTableAuthenticated = sql`exists (
   select 1 from public.users where users.clerk_id = (select auth.jwt() ->> 'sub')
 )`;
+
+// Increment Sector Code
+export const sectorCodeSeq = pgSequence('sector_code_seq');
 
 // Enums
 export const userRoleEnum = pgEnum('user_role', [

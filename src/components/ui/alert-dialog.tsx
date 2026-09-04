@@ -32,16 +32,25 @@ function AlertDialogOverlay({ className, ...props }: AlertDialogPrimitive.Backdr
   );
 }
 
+type HasShowCloseButton =
+  | {
+      showCloseButton?: false;
+      onClose?: never;
+    }
+  | {
+      showCloseButton?: true;
+      onClose: () => void;
+    };
 function AlertDialogContent({
   className,
   size = 'default',
   children,
   showCloseButton,
+  onClose,
   ...props
 }: AlertDialogPrimitive.Popup.Props & {
   size?: 'default' | 'sm';
-  showCloseButton?: boolean;
-}) {
+} & HasShowCloseButton) {
   return (
     <AlertDialogPortal>
       <AlertDialogOverlay />
@@ -57,7 +66,8 @@ function AlertDialogContent({
         {showCloseButton && (
           <AlertDialogPrimitive.Close
             data-slot="alert-dialog-cancel"
-            render={<Button variant="ghost" className="absolute top-2 right-2" size="icon-sm" />}>
+            render={<Button variant="ghost" className="absolute top-2 right-2" size="icon-sm" />}
+            onClick={onClose}>
             <XIcon />
             <span className="sr-only">Close</span>
           </AlertDialogPrimitive.Close>

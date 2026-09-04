@@ -111,7 +111,7 @@ export const GET = withRole(
 
       return ok<TUserWithSector[]>(
         formattedUser,
-        'Successfully update user',
+        'Successfully get all users with sector',
         getApiMetadata({ page, limit, pageSize: formattedUser.length, totalItems: result.total }),
       );
     } catch (error) {

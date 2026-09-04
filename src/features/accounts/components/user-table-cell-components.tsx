@@ -193,7 +193,8 @@ export function ActionsCell(user: TUserWithSector) {
           headerTitle="Edit Official Account & Role"
           headerDescription="Assign role level, standing committee, and contact credentials"
           icon={Edit}
-          isSubmitting={form.formState.isSubmitting}>
+          isSubmitting={form.formState.isSubmitting}
+          onResetForm={() => form.reset()}>
           <UpdateAccountForm
             formId="update-account-form"
             control={form.control}

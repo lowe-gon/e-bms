@@ -1,9 +1,20 @@
 'use client';
 
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+} from '@/components/ui/command';
 import { Field, FieldError, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import {
   Select,
   SelectContent,
@@ -13,7 +24,8 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { base64ToFile, cn, fileToBase64 } from '@/lib/utils';
-import { CheckCircle, Eye, EyeOff, RotateCcw, Upload } from 'lucide-react';
+import type { TOption } from '@/typings';
+import { Check, CheckCircle, ChevronDown, Eye, EyeOff, RotateCcw, Upload } from 'lucide-react';
 import Image from 'next/image';
 import React from 'react';
 import { Controller, type Control, type FieldValues, type Path } from 'react-hook-form';
@@ -131,7 +143,7 @@ interface IFormFieldSelectOptionInput<TFieldValues extends FieldValues> extends 
   control: Control<TFieldValues>;
   name: Path<TFieldValues>;
   label: string;
-  options: Array<{ label: string; value: string; imageUrl?: string }>;
+  options: TOption[];
   isRequired?: boolean;
 }
 export function FormFieldSelectOptionInput<TFieldValues extends FieldValues>({
@@ -169,7 +181,7 @@ export function FormFieldSelectOptionInput<TFieldValues extends FieldValues>({
                 <SelectValue
                   ref={field.ref}
                   onBlur={field.onBlur}
-                  className={'pt-2'}
+                  className={'pt-2.5'}
                   aria-disabled={fieldState.isValidating}
                 />
               </SelectTrigger>
@@ -177,12 +189,168 @@ export function FormFieldSelectOptionInput<TFieldValues extends FieldValues>({
                 <SelectGroup>
                   {options.map((item) => (
                     <SelectItem key={item.value} value={item.value}>
-                      {item.label}
+                      {item.imageUrl ? (
+                        <div className="flex items-center gap-2">
+                          <Avatar>
+                            <AvatarImage src={item.imageUrl} />
+                            <AvatarFallback>
+                              {item.label
+                                .split(' ')
+                                .map((l) => l.charAt(0))
+                                .join('')}
+                            </AvatarFallback>
+                          </Avatar>
+
+                          <span>{item.label}</span>
+                        </div>
+                      ) : (
+                        item.label
+                      )}
                     </SelectItem>
                   ))}
                 </SelectGroup>
               </SelectContent>
             </Select>
+
+            <FieldLabel
+              htmlFor={fieldName}
+              aria-invalid={isInvalid}
+              className={cn(
+                'pointer-events-none absolute top-1/2 left-3 z-20 -translate-y-1/2 gap-1 font-medium transition-all duration-300',
+                'peer-focus-within:text-muted-foreground peer-focus-within:top-3 peer-focus-within:text-[10px] peer-focus-within:font-semibold',
+                'peer-data-[filled=true]:text-muted-foreground peer-data-[filled=true]:top-3 peer-data-[filled=true]:text-[10px] peer-data-[filled=true]:font-semibold',
+              )}>
+              {label}
+              {isRequired && <span className="text-rose-500">*</span>}
+            </FieldLabel>
+
+            {isInvalid && (
+              <div className="absolute -top-4.5 flex items-end justify-end">
+                <FieldError className="text-[10px] font-semibold">{errorMessage}</FieldError>
+              </div>
+            )}
+          </Field>
+        );
+      }}
+    />
+  );
+}
+
+type THasNextPage =
+  | { hasNextPage?: true; onLoadMore: () => void }
+  | {
+      hasNextPage?: false;
+      onLoadMore?: never;
+    };
+type TFormFieldCommandOptionInput<TFieldValues extends FieldValues> = THasNextPage &
+  React.ComponentProps<typeof CommandInput> & {
+    containerClassName?: string;
+    control: Control<TFieldValues>;
+    name: Path<TFieldValues>;
+    label: string;
+    options: TOption[];
+    isRequired?: boolean;
+  };
+export function FormFieldCommandOptionInput<TFieldValues extends FieldValues>({
+  control,
+  name,
+  containerClassName,
+  label,
+  options,
+  placeholder,
+  isRequired,
+  hasNextPage = false,
+  onLoadMore,
+  ...props
+}: TFormFieldCommandOptionInput<TFieldValues>) {
+  return (
+    <Controller
+      control={control}
+      name={name}
+      render={({ field, fieldState }) => {
+        const isInvalid = fieldState.invalid;
+        const errorMessage = fieldState.error?.message;
+        const fieldName = field.name;
+        const hasValue = Boolean(field.value);
+
+        const selectedValue = options.find((o) => o.value === field.value);
+
+        return (
+          <Field data-invalid={isInvalid} className={cn('relative w-full', containerClassName)}>
+            <Popover>
+              <PopoverTrigger
+                data-filled={hasValue}
+                className="peer"
+                render={
+                  <Button
+                    variant="outline"
+                    aria-label={label}
+                    title={label}
+                    className="relative h-12 justify-start pt-3">
+                    {selectedValue?.label || null}
+                    <div className="absolute top-1/2 right-4 -translate-y-1/2">
+                      <ChevronDown />
+                    </div>
+                  </Button>
+                }
+              />
+              <PopoverContent align="start" className="w-(--anchor-width) p-0">
+                <Command>
+                  <CommandInput placeholder={placeholder} {...props} />
+
+                  <CommandList className="max-h-full">
+                    <CommandEmpty>No results found.</CommandEmpty>
+                    <CommandGroup className="max-h-75 scroll-py-1 overflow-x-hidden overflow-y-auto">
+                      {options.map((option) => {
+                        const isSelected = option.value === field.value;
+
+                        return (
+                          <CommandItem
+                            key={option.value}
+                            className="[&>svg:last-child]:hidden"
+                            onSelect={() => {
+                              field.onChange(option.value);
+                            }}>
+                            {option.imageUrl ? (
+                              <div className="flex items-center gap-2">
+                                <Avatar>
+                                  <AvatarImage src={option.imageUrl} />
+                                  <AvatarFallback>
+                                    {option.label
+                                      .split(' ')
+                                      .map((l) => l.charAt(0))
+                                      .join('')}
+                                  </AvatarFallback>
+                                </Avatar>
+
+                                <span>{option.label}</span>
+                              </div>
+                            ) : (
+                              option.label
+                            )}
+                            {isSelected && (
+                              <div className="absolute top-1/2 right-4 -translate-y-1/2">
+                                <Check />
+                              </div>
+                            )}
+                          </CommandItem>
+                        );
+                      })}
+                    </CommandGroup>
+                    {hasNextPage && (
+                      <>
+                        <CommandSeparator />
+                        <CommandGroup className="flex items-center justify-center">
+                          <Button variant="ghost" onClick={onLoadMore}>
+                            Load more
+                          </Button>
+                        </CommandGroup>
+                      </>
+                    )}
+                  </CommandList>
+                </Command>
+              </PopoverContent>
+            </Popover>
 
             <FieldLabel
               htmlFor={fieldName}

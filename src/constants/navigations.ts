@@ -93,7 +93,7 @@ export const getNavSections = (role: UserRole, sector?: string) => {
 
   const SectorIcon = getSectorIcon(sector!);
   const committeeItem: NavItem = {
-    id: 'committee',
+    id: 'committees',
     label: sector ? `Committee: ${sector}` : 'Standing Committees',
     icon: SectorIcon,
     description: 'Thematic Areas',

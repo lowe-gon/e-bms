@@ -1,49 +1,47 @@
 'use client';
 
-import Modal from '@/components/common/modal';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import SectorForm from '@/features/sectors/components/sector-form';
-import { useSectorContext } from '@/features/sectors/context/sectors.context';
-import useSectorForm from '@/features/sectors/hooks/use-sector-form';
-import { Compass, Plus } from 'lucide-react';
+import { useUserMeContext } from '@/features/users/context/user-me.contex';
+import { Layers2, UserPlus } from 'lucide-react';
 import React from 'react';
 
-export default function SectorBanner() {
+export default function CommitteeBanner() {
   const [isOpenModal, setIsOpenModal] = React.useState(false);
-  const { form, onSubmitHandler } = useSectorForm({
-    mode: 'create',
-    onCloseModal: () => setIsOpenModal(false),
-  });
+  const { user } = useUserMeContext();
 
-  const { officials, hasNextPage, onLoadMore } = useSectorContext();
+  const isCaptainOrSecretary = user?.role === 'captain' || user?.role === 'secretary' || 'captain';
 
   return (
     <>
       <Card>
         <CardContent className="relative p-5">
           <div className="pointer-events-none absolute top-0 right-0 bottom-0 flex items-center pr-8 opacity-10">
-            <Compass className="text-muted-foreground -z-50 size-56" />
+            <Layers2 className="text-muted-foreground -z-50 size-56" />
           </div>
 
           <div className="z-50 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <div className="max-w-3xl">
-              <h1 className="banner-title">Geographic Sectors & Zone Area Directory</h1>
+              <h1 className="banner-title">
+                Barangay Council Standing Committees & Multi-Person Rosters
+              </h1>
               <p className="banner-description mt-2">
-                Manage the official geographic sector and zone area directory, assign councilors,
-                and maintain accurate territorial records for Barangay Calungboyan.
+                Barangay Council Standing Committee Setup, Multi-Personnel Assignments, Budget &
+                Demographic Portals
               </p>
             </div>
 
-            <Button size="lg" onClick={() => setIsOpenModal(true)}>
-              <Plus />
-              <span>Add New Sector</span>
-            </Button>
+            {isCaptainOrSecretary && (
+              <Button size="lg" onClick={() => setIsOpenModal(true)}>
+                <UserPlus />
+                <span>Create Committee</span>
+              </Button>
+            )}
           </div>
         </CardContent>
       </Card>
 
-      <Modal
+      {/* <Modal
         type="create"
         open={isOpenModal}
         onOpenChange={setIsOpenModal}
@@ -65,7 +63,7 @@ export default function SectorBanner() {
           }))}
           {...(hasNextPage && { hasNextPage, onLoadMore })}
         />
-      </Modal>
+      </Modal> */}
     </>
   );
 }

@@ -1,4 +1,6 @@
 import SectorBanner from '@/features/sectors/components/banner';
+import SectorCarouselWithDetail from '@/features/sectors/components/sector-carousel-with-detail';
+import { SectorProvider } from '@/features/sectors/context/sectors.context';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -10,7 +12,10 @@ export const metadata: Metadata = {
 export default function SectorsPage() {
   return (
     <>
-      <SectorBanner />
+      <SectorProvider>
+        <SectorBanner />
+        <SectorCarouselWithDetail />
+      </SectorProvider>
     </>
   );
 }

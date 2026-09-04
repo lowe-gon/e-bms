@@ -19,8 +19,9 @@ type TModalType =
       icon?: never;
       submitText?: never;
       formId?: never;
-      onSubmit: () => void;
+      onSubmit: () => Promise<void>;
       children?: never;
+      onResetForm?: never;
     }
   | {
       type: 'update';
@@ -29,6 +30,7 @@ type TModalType =
       formId: string;
       onSubmit?: never;
       children: React.ReactNode;
+      onResetForm: () => void;
     }
   | {
       type: 'create';
@@ -37,6 +39,7 @@ type TModalType =
       formId: string;
       onSubmit?: never;
       children: React.ReactNode;
+      onResetForm: () => void;
     };
 
 type TModal = TModalType & {
@@ -59,6 +62,7 @@ export default function Modal({
   formId,
   isSubmitting,
   onSubmit,
+  onResetForm,
 }: TModal) {
   if (type === 'delete') {
     return (
@@ -69,7 +73,7 @@ export default function Modal({
               <Trash2Icon />
             </AlertDialogMedia>
             <AlertDialogTitle>{headerTitle}</AlertDialogTitle>
-            <AlertDialogDescription className="text-center!">
+            <AlertDialogDescription className="text-center! whitespace-pre-line">
               {headerDescription}
             </AlertDialogDescription>
           </AlertDialogHeader>
@@ -95,7 +99,8 @@ export default function Modal({
       <AlertDialog open={open} onOpenChange={onOpenChange}>
         <AlertDialogContent
           className={cn('overflow-hidden p-0 sm:max-w-md! md:max-w-xl! lg:max-w-2xl!')}
-          showCloseButton={true}>
+          showCloseButton
+          onClose={onResetForm}>
           <AlertDialogHeader className="flex items-center border-b px-3 pt-3 pb-2">
             <AlertDialogMedia className="bg-primary/10 text-primary dark:bg-primary/20">
               {Icon && <Icon />}
@@ -110,7 +115,11 @@ export default function Modal({
             {children}
           </div>
           <AlertDialogFooter className="m-0! px-3! pb-3!">
-            <AlertDialogCancel disabled={isSubmitting} variant="outline" className="h-10">
+            <AlertDialogCancel
+              disabled={isSubmitting}
+              variant="outline"
+              className="h-10"
+              onClick={onResetForm}>
               Cancel
             </AlertDialogCancel>
             <AlertDialogAction disabled={isSubmitting} type="submit" form={formId} className="h-10">
@@ -126,7 +135,8 @@ export default function Modal({
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent
         className={cn('overflow-hidden p-0 sm:max-w-md! md:max-w-xl! lg:max-w-2xl!')}
-        showCloseButton={true}>
+        showCloseButton
+        onClose={onResetForm}>
         <AlertDialogHeader className="flex items-center border-b px-3 pt-3 pb-2">
           <AlertDialogMedia className="bg-primary/10 text-primary dark:bg-primary/20">
             {Icon && <Icon />}
@@ -141,7 +151,11 @@ export default function Modal({
           {children}
         </div>
         <AlertDialogFooter className="m-0! px-3! pb-3!">
-          <AlertDialogCancel disabled={isSubmitting} variant="outline" className="h-10">
+          <AlertDialogCancel
+            disabled={isSubmitting}
+            variant="outline"
+            className="h-10"
+            onClick={onResetForm}>
             Cancel
           </AlertDialogCancel>
           <AlertDialogAction disabled={isSubmitting} type="submit" form={formId} className="h-10">

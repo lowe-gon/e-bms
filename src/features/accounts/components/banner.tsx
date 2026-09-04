@@ -47,7 +47,8 @@ export default function AccountBanner() {
         icon={UserPlus}
         submitText="Create Official Account"
         formId="create-account-form"
-        isSubmitting={form.formState.isSubmitting}>
+        isSubmitting={form.formState.isSubmitting}
+        onResetForm={() => form.reset()}>
         <AccountForm
           formId="create-account-form"
           form={form}

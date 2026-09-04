@@ -16,7 +16,9 @@ export const ZSectorFormSchema = z.object({
           ? 'purokCoverage schema is required'
           : 'purokCoverage schema must be string',
     })
-    .min(1, 'Purok coverage is required'),
+    .refine((arr) => arr.length > 0, {
+      message: 'At least one valid Purok',
+    }),
   assignedCouncilorId: z
     .string({
       error: (iss) =>
@@ -24,7 +26,7 @@ export const ZSectorFormSchema = z.object({
           ? 'assignedCouncilorId schema is required'
           : 'assignedCouncilorId schema must be string',
     })
-    .min(1, 'Assigned councilor is required'),
+    .min(1, 'Assign atleast one council'),
 });
 
 export type TSectorFormSchema = z.infer<typeof ZSectorFormSchema>;

@@ -4,13 +4,13 @@ import { LoadingScreen } from '@/components/common/loading';
 import AppHeader from '@/components/layouts/app-header';
 import AppSidebar from '@/components/layouts/app-sidebar';
 import { SidebarInset, SidebarProvider as SidebarProviderBase } from '@/components/ui/sidebar';
-import useGetUserMeQuery from '@/features/users/hooks/use-get-user-me-query';
+import { useUserMeContext } from '@/features/users/context/user-me.contex';
 import React from 'react';
 
 export default function SidebarProvider({ children }: React.PropsWithChildren) {
-  const { data: user, isFetching: isLoading } = useGetUserMeQuery();
+  const { user, isLoading } = useUserMeContext();
 
-  if (isLoading || !user?.data) {
+  if (isLoading || !user) {
     return <LoadingScreen />;
   }
 
@@ -23,7 +23,7 @@ export default function SidebarProvider({ children }: React.PropsWithChildren) {
             '--header-height': 'calc(var(--spacing) * 12)',
           } as React.CSSProperties
         }>
-        <AppSidebar variant="inset" user={user.data} />
+        <AppSidebar variant="inset" user={user} />
         <SidebarInset>
           <AppHeader />
           <div className="@container/main flex flex-1 flex-col gap-4 p-4 pt-0">{children}</div>
